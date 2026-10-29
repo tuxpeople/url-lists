@@ -26,7 +26,7 @@ jobs:
           persist-credentials: ${{ github.event_name != 'pull_request' }}
       - uses: actions/setup-python@v7
         with:
-          python-version: '3.13'
+          python-version: '3.15'
       - run: python -m unittest discover -s tests -v
       - name: Validate local lists on pull requests
         if: github.event_name == 'pull_request'
