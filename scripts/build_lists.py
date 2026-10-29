@@ -1,0 +1,120 @@
+"""Build strict domain lists using only the Python standard library."""
+
+import argparse
+import ipaddress
+import json
+from pathlib import Path
+import re
+import tempfile
+from urllib.parse import urlsplit
+from urllib.request import urlopen
+
+ROOT = Path(__file__).resolve().parents[1]
+MAX_BYTES = 20 * 1024 * 1024
+
+
+def parse_domains(text, origin):
+    domains = set()
+    for number, line in enumerate(text.splitlines(), 1):
+        value = line.split("#", 1)[0].strip().lower().rstrip(".")
+        if not value:
+            continue
+        try:
+            value = value.encode("idna").decode("ascii")
+            hostname = value[2:] if value.startswith("*.") else value
+            labels = hostname.split(".")
+            if len(value) > 253 or len(labels) < 2 or any(
+                not re.fullmatch(r"[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?", label)
+                for label in labels
+            ):
+                raise ValueError("invalid domain")
+            try:
+                ipaddress.ip_address(hostname)
+            except ValueError:
+                pass
+            else:
+                raise ValueError("IP addresses are not domains")
+        except (ValueError, UnicodeError) as error:
+            raise ValueError(f"{origin}:{number}: invalid domain {line!r}") from error
+        domains.add(value)
+    return domains
+
+
+def download(url):
+    if urlsplit(url).scheme != "https":
+        raise ValueError("Sources must use HTTPS")
+    with urlopen(url, timeout=60) as response:
+        if urlsplit(response.url).scheme != "https":
+            raise ValueError("Redirect to non-HTTPS source")
+        data = response.read(MAX_BYTES + 1)
+    if len(data) > MAX_BYTES:
+        raise ValueError("Source exceeds 20 MiB")
+    return data.decode("utf-8-sig")
+
+
+def export_pihole(output, name, domains):
+    """Export exact domains and strict subdomain-only POSIX ERE rules."""
+    exact = sorted(domain for domain in domains if not domain.startswith("*."))
+    regex = sorted(
+        r"^([^.]+\.)+" + domain[2:].replace(".", r"\.") + "$"
+        for domain in domains if domain.startswith("*.")
+    )
+    output.mkdir(exist_ok=True)
+    for suffix, entries in (("exact", exact), ("regex", regex)):
+        (output / f"{name}-{suffix}.txt").write_text(
+            "".join(entry + "\n" for entry in entries), encoding="utf-8"
+        )
+
+
+def build(root=ROOT, offline=False):
+    config = json.loads((root / "sources.json").read_text(encoding="utf-8"))
+    result = {kind: set() for kind in ("allow", "block")}
+    for kind in result:
+        for path in sorted((root / "lists" / kind).glob("*.txt")):
+            result[kind].update(parse_domains(path.read_text(encoding="utf-8"), path))
+    names = set()
+    for source in config["sources"]:
+        name = source["name"]
+        if name in names:
+            raise ValueError(f"Duplicate source name: {name}")
+        names.add(name)
+        kind = source["type"]
+        if kind not in result:
+            raise ValueError(f"Invalid source type: {kind}")
+        if not source.get("enabled", True) or offline:
+            continue
+        if not source.get("license") or not source.get("homepage"):
+            raise ValueError(f"{name}: homepage and license are required")
+        domains = parse_domains(download(source["url"]), name)
+        if not domains:
+            raise ValueError(f"{name}: empty source")
+        result[kind].update(domains)
+    conflicts = result["allow"] & result["block"]
+    if conflicts:
+        raise ValueError("Allow/block conflict: " + ", ".join(sorted(conflicts)[:20]))
+    # Do not change outputs until every input has passed validation.
+    output = root / "dist"
+    output.mkdir(exist_ok=True)
+    for kind, domains in result.items():
+        content = "".join(domain + "\n" for domain in sorted(domains))
+        with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8", dir=output, delete=False) as handle:
+            handle.write(content)
+            temporary = Path(handle.name)
+        temporary.replace(output / f"{kind}.txt")
+        print(f"{kind}: {len(domains)} domains")
+        export_pihole(root / "pihole", kind, domains)
+    for name in ("apple", "docker", "openshift"):
+        source = root / "lists" / "allow" / f"{name}.txt"
+        if source.exists():
+            export_pihole(root / "pihole", f"{name}-allow",
+                          parse_domains(source.read_text(encoding="utf-8"), source))
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--offline", action="store_true", help="Build local lists only")
+    args = parser.parse_args()
+    try:
+        build(offline=args.offline)
+    except (ValueError, OSError, KeyError) as error:
+        parser.exit(1, f"Error: {error}\n")

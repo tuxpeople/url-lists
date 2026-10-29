@@ -1,0 +1,149 @@
+category,subcategory,hosts,ports,protocol,os,description,supports_proxies
+Device setup,,albert.apple.com,443,TCP,"iOS, iPadOS, tvOS, macOS, and visionOS",Device activation,Yes
+Device setup,,captive.apple.com,"443, 80",TCP,"iOS, iPadOS, tvOS, macOS, and visionOS",Internet connectivity validation for networks that use captive portals,Yes
+Device setup,,gs.apple.com,443,TCP,"iOS, iPadOS, tvOS, macOS, and visionOS",,Yes
+Device setup,,humb.apple.com,443,TCP,"iOS, iPadOS, tvOS, macOS, and visionOS",,Yes
+Device setup,,static.ips.apple.com,"443, 80",TCP,"iOS, iPadOS, tvOS, macOS, and visionOS",,Yes
+Device setup,,sq-device.apple.com,443,TCP,"iOS, iPadOS, and visionOS",eSIM activation,—
+Device setup,,tbsc.apple.com,443,TCP,"iOS, iPadOS, tvOS, macOS, and visionOS",,Yes
+Device setup,,time-ios.apple.com,123,UDP,"iOS, iPadOS, tvOS, and visionOS",Used by devices to set their date and time,—
+Device setup,,time.apple.com,123,UDP,"iOS, iPadOS, tvOS, macOS, and visionOS",Used by devices to set their date and time,—
+Device setup,,time-macos.apple.com,123,UDP,macOS only,Used by devices to set their date and time,—
+Device management,,*.push.apple.com,"443, 80, 5223, 2197",TCP,"iOS, iPadOS, tvOS, macOS, and visionOS",Push notifications,Learn more about APNs and proxies.
+Device management,,deviceenrollment.apple.com,443,TCP,"iOS, iPadOS, tvOS, and macOS",DEP provisional enrollment,—
+Device management,,deviceservices-external.apple.com,443,TCP,"iOS, iPadOS, tvOS, and macOS",Used by an device management service to disable Activation Lock on managed devices,—
+Device management,,gdmf.apple.com,443,TCP,"iOS, iPadOS, tvOS, and macOS",Used by an device management service to identify which software updates are available to devices that use managed software updates,Yes
+Device management,,identity.apple.com,443,TCP,"iOS, iPadOS, tvOS, macOS, and visionOS",APNs certificate request portal,Yes
+Device management,,iprofiles.apple.com,443,TCP,"iOS, iPadOS, tvOS, and macOS",Hosts enrollment profiles used when devices enroll in Apple School Manager or Apple Business through Device Enrollment,Yes
+Device management,,mdmenrollment.apple.com,443,TCP,"iOS, iPadOS, tvOS, and macOS","Device management services to upload enrollment profiles used by clients enrolling through Device Enrollment in Apple School Manager or Apple Business, and to look up devices and accounts",Yes
+Device management,,setup.icloud.com,443,TCP,iOS and iPadOS,Required to log in to a Managed Apple Account on Shared iPad,—
+Device management,,vpp.itunes.apple.com,443,TCP,"iOS, iPadOS, tvOS, macOS, and visionOS","Device management services to perform operations related to Apps and Books, like assigning or revoking licenses on a device",Yes
+Device management,,*.appattest.apple.com,443,TCP,"iOS, iPadOS, tvOS, macOS, and visionOS",Managed device attestation,—
+Device management,,axm-servicediscovery.apple.com,443,TCP,"iOS, iPadOS, macOS, and visionOS",Service discovery for account-driven enrollments,—
+Apple School Manager and Apple Business,Administrators and managers,*.business.apple.com,"443, 80",TCP,-,Apple Business,—
+Apple School Manager and Apple Business,Administrators and managers,*.school.apple.com,"443, 80",TCP,-,Apple School Manager,—
+Apple School Manager and Apple Business,Administrators and managers,appleid.cdn-apple.com,443,TCP,-,Login authentication,Yes
+Apple School Manager and Apple Business,Administrators and managers,idmsa.apple.com,443,TCP,-,Login authentication,Yes
+Apple School Manager and Apple Business,Administrators and managers,*.itunes.apple.com,"443, 80",TCP,-,Apps and Books,Yes
+Apple School Manager and Apple Business,Administrators and managers,*.mzstatic.com,443,TCP,-,Apps and Books,—
+Apple School Manager and Apple Business,Administrators and managers,api.ent.apple.com,443,TCP,-,Apps and Books (ABM),—
+Apple School Manager and Apple Business,Administrators and managers,api.edu.apple.com,443,TCP,-,Apps and Books (ASM),—
+Apple School Manager and Apple Business,Administrators and managers,statici.icloud.com,443,TCP,-,Device icons,—
+Apple School Manager and Apple Business,Administrators and managers,*.vertexsmb.com,443,TCP,-,Validating tax-exempt status,—
+Apple School Manager and Apple Business,Administrators and managers,www.apple.com,443,TCP,-,Fonts for certain languages,—
+Apple School Manager and Apple Business,Administrators and managers,upload.appleschoolcontent.com,22,SSH,-,SFTP uploads,Yes
+Apple School Manager and Apple Business,Administrators and managers,api-business.apple.com,443,TCP,-,Apple Business API,—
+Apple School Manager and Apple Business,Administrators and managers,api-school.apple.com,443,TCP,-,Apple School Manager API,—
+Apple School Manager and Apple Business,Employees and students,ws-ee-maidsvc.icloud.com,"443, 80",TCP,"iOS, iPadOS, macOS, and visionOS",User lookup service,—
+Apple Business device management,,axm-adm-enroll.apple.com,443,TCP,"iOS, iPadOS, tvOS, and macOS",DEP enrollment server,—
+Apple Business device management,,axm-adm-mdm.apple.com,443,TCP,"iOS, iPadOS, tvOS, and macOS",Device management service,—
+Apple Business device management,,axm-adm-scep.apple.com,443,TCP,"iOS, iPadOS, tvOS, and macOS",SCEP server,—
+Apple Business device management,,axm-app.apple.com,443,TCP,"iOS, iPadOS, and macOS",View and manage apps and devices,—
+Apple Business device management,,*.apple-mapkit.com,443,TCP,iOS and iPadOS,View the location of devices in Managed Lost Mode,—
+Apple Business device management,,icons.axm-usercontent-apple.com,443,TCP,macOS,Custom Package icons,—
+Classroom and Schoolwork,,s.mzstatic.com,443,TCP,iPadOS and macOS,Classroom and Schoolwork device verification,—
+Classroom and Schoolwork,,play.itunes.apple.com,443,TCP,iPadOS and macOS,Classroom and Schoolwork device verification,—
+Classroom and Schoolwork,,ws-ee-maidsvc.icloud.com,443,TCP,iPadOS and macOS,Classroom and Schoolwork class roster service,—
+Classroom and Schoolwork,,ws.school.apple.com,443,TCP,iPadOS and macOS,Classroom and Schoolwork class roster service,—
+Classroom and Schoolwork,,pg-bootstrap.itunes.apple.com,443,TCP,iPadOS,Schoolwork handout service,—
+Classroom and Schoolwork,,cls-iosclient.itunes.apple.com,443,TCP,iPadOS,Schoolwork handout service,—
+Classroom and Schoolwork,,cls-ingest.itunes.apple.com,443,TCP,iPadOS,Schoolwork handout service,—
+Software updates,,appldnld.apple.com,80,TCP,"iOS, iPadOS, watchOS, and visionOS","iOS, iPadOS, and watchOS updates",—
+Software updates,,configuration.apple.com,443,TCP,macOS only,Rosetta 2 updates,—
+Software updates,,gdmf.apple.com,443,TCP,"iOS, iPadOS, tvOS, watchOS, and macOS",Software update catalog,—
+Software updates,,gg.apple.com,"443, 80",TCP,"iOS, iPadOS, tvOS, watchOS, macOS, and visionOS","iOS, iPadOS, tvOS, watchOS, and macOS updates",Yes
+Software updates,,gs.apple.com,"443, 80",TCP,"iOS, iPadOS, tvOS, watchOS, macOS, and visionOS","iOS, iPadOS, tvOS, watchOS, and macOS updates",Yes
+Software updates,,ig.apple.com,443,TCP,macOS only,macOS updates,Yes
+Software updates,,mesu.apple.com,"443, 80",TCP,"iOS, iPadOS, tvOS, watchOS, macOS, and visionOS",Hosts software update catalogs,—
+Software updates,,oscdn.apple.com,"443, 80",TCP,macOS only,macOS Recovery,—
+Software updates,,osrecovery.apple.com,"443, 80",TCP,macOS only,macOS Recovery,—
+Software updates,,skl.apple.com,443,TCP,macOS only,macOS updates,—
+Software updates,,swcdn.apple.com,"443, 80",TCP,macOS only,macOS updates,—
+Software updates,,swdist.apple.com,443,TCP,macOS only,macOS updates,—
+Software updates,,swdownload.apple.com,"443, 80",TCP,macOS only,macOS updates,Yes
+Software updates,,swscan.apple.com,443,TCP,macOS only,macOS updates,—
+Software updates,,updates-http.cdn-apple.com,80,TCP,"iOS, iPadOS, tvOS, macOS, and visionOS",Software update downloads,—
+Software updates,,updates.cdn-apple.com,443,TCP,"iOS, iPadOS, tvOS, macOS, and visionOS",Software update downloads,—
+Software updates,,xp.apple.com,443,TCP,"iOS, iPadOS, tvOS, macOS, and visionOS",,Yes
+Software updates,,gdmf-ados.apple.com,443,TCP,"iOS, iPadOS, and macOS",Software update catalog for additional components,Yes
+Software updates,,gsra.apple.com,443,TCP,"iOS, iPadOS, and macOS",OS updates for additional components,Yes
+Software updates,,wkms-public.apple.com,443,TCP,"iOS, iPadOS, and macOS","Installing iOS, iPadOS, or macOS on an attached device",Yes
+Software updates,,fcs-keys-pub-prod.cdn-apple.com,443,TCP,"iOS, iPadOS, and macOS","Installing iOS, iPadOS, or macOS on an attached device",Yes
+Apps and additional content,,*.itunes.apple.com,"443, 80",TCP,"iOS, iPadOS, tvOS, macOS, and visionOS","Store content such as apps, books, and music",Yes
+Apps and additional content,,*.apps.apple.com,443,TCP,"iOS, iPadOS, tvOS, macOS, and visionOS","Store content such as apps, books, and music",Yes
+Apps and additional content,,*.mzstatic.com,443,TCP,"iOS, iPadOS, tvOS, macOS, and visionOS","Store content such as apps, books, and music, and apps from websites and alternative marketplaces",—
+Apps and additional content,,itunes.apple.com,"443, 80",TCP,"iOS, iPadOS, tvOS, macOS, and visionOS",,Yes
+Apps and additional content,,ppq.apple.com,443,TCP,"iOS, iPadOS, tvOS, macOS, and visionOS",Enterprise App validation,—
+Apps and additional content,,api.apple-cloudkit.com,443,TCP,macOS,App notarization,—
+Apps and additional content,,*.appattest.apple.com,443,TCP,"iOS, iPadOS, macOS, and visionOS","App validation, Touch ID and Face ID authentication for websites",—
+Apps and additional content,,*.apps-marketplace.apple.com,443,TCP,iOS,Installing apps from websites and alternative marketplaces,Yes
+Apps and additional content,,token.safebrowsing.apple,443,TCP,"iOS, iPadOS, macOS, and visionOS",Safari fraudulent website warnings,__
+Apps and additional content,,audiocontentdownload.apple.com,"80, 443",TCP,"iOS, iPadOS, and macOS",GarageBand downloadable content,—
+Apps and additional content,,devimages-cdn.apple.com,"80, 443",TCP,macOS,Xcode downloadable components,—
+Apps and additional content,,download.developer.apple.com,"80, 443",TCP,macOS,Xcode downloadable components,—
+Apps and additional content,,playground-assets-cdn.apple.com,443,TCP,iPadOS and macOS,Swift Playground,—
+Apps and additional content,,playground-cdn.apple.com,443,TCP,iPadOS and macOS,Swift Playground,—
+Apps and additional content,,sylvan.apple.com,"80, 443",TCP,tvOS and macOS,Aerial screen savers and wallpaper,—
+Apps and additional content,,gateway.icloud.com,443,TCP/UDP,"iOS, iPadOS, tvOS, macOS, and visionOS",CloudKit content including XProtect updates and Voice Control assets,—
+Carrier updates,,appldnld.apple.com,80,TCP,iOS and iPadOS,Cellular carrier bundle updates,—
+Carrier updates,,appldnld.apple.com.edgesuite.net,80,TCP,iOS and iPadOS,Cellular carrier bundle updates,—
+Carrier updates,,itunes.com,80,TCP,iOS and iPadOS,Carrier bundle update discovery,—
+Carrier updates,,itunes.apple.com,443,TCP,iOS and iPadOS,Carrier bundle update discovery,—
+Carrier updates,,updates-http.cdn-apple.com,80,TCP,iOS and iPadOS,Cellular carrier bundle updates,—
+Carrier updates,,updates.cdn-apple.com,443,TCP,iOS and iPadOS,Cellular carrier bundle updates,—
+Content caching,,lcdn-registration.apple.com,443,TCP,macOS,Server registration,Yes
+Content caching,,suconfig.apple.com,80,TCP,macOS,Configuration,—
+Content caching,,xp-cdn.apple.com,443,TCP,macOS,Reporting,Yes
+Content caching,,lcdn-locator.apple.com,443,TCP,"iOS, iPadOS, tvOS, macOS, and visionOS",Content caching locator service,—
+Content caching,,serverstatus.apple.com,443,TCP,macOS,Content caching client public IP determination,—
+Beta updates,,bpapi.apple.com,443,TCP,"iOS, iPadOS, tvOS, watchOS, macOS, and visionOS",Beta update enrollment,Yes
+Beta updates,,cssubmissions.apple.com,443,TCP,"iOS, iPadOS, tvOS, macOS, and visionOS",Used by Feedback Assistant to upload files,Yes
+Beta updates,,fba.apple.com,443,TCP,"iOS, iPadOS, tvOS, macOS, and visionOS",Used by Feedback Assistant to file and view feedback,Yes
+Apple diagnostics,,diagassets.apple.com,443,TCP,"iOS, iPadOS, tvOS, macOS, and visionOS",Used by Apple devices to help detect possible hardware issues,Yes
+Domain Name System resolution,,doh.dns.apple.com,443,TCP,"iOS, iPadOS, tvOS, macOS, and visionOS",Used for DNS over HTTPS (DoH),Yes
+Certificate validation,,certs.apple.com,"80, 443",TCP,"iOS, iPadOS, tvOS, macOS, and visionOS",Certificate validation,—
+Certificate validation,,crl.apple.com,80,TCP,"iOS, iPadOS, tvOS, macOS, and visionOS",Certificate validation,—
+Certificate validation,,crl3.digicert.com,80,TCP,"iOS, iPadOS, tvOS, macOS, and visionOS",Certificate validation,—
+Certificate validation,,crl4.digicert.com,80,TCP,"iOS, iPadOS, tvOS, macOS, and visionOS",Certificate validation,—
+Certificate validation,,ocsp.apple.com,80,TCP,"iOS, iPadOS, tvOS, macOS, and visionOS",Certificate validation,—
+Certificate validation,,ocsp.digicert.cn,80,TCP,"iOS, iPadOS, tvOS, macOS, and visionOS",Certificate validation in China,—
+Certificate validation,,ocsp.digicert.com,80,TCP,"iOS, iPadOS, tvOS, macOS, and visionOS",Certificate validation,—
+Certificate validation,,ocsp2.apple.com,443,TCP,"iOS, iPadOS, tvOS, macOS, and visionOS",Certificate validation,—
+Certificate validation,,valid.apple.com,443,TCP,"iOS, iPadOS, tvOS, macOS, and visionOS",Certificate validation,Yes
+Apple Account,,account.apple.com,443,TCP,"iOS, iPadOS, tvOS, macOS, and visionOS",Apple Account authentication in Settings and System Preferences,Yes
+Apple Account,,appleid.cdn-apple.com,443,TCP,"iOS, iPadOS, tvOS, macOS, and visionOS",Apple Account authentication in Settings and System Preferences,Yes
+Apple Account,,idmsa.apple.com,443,TCP,"iOS, iPadOS, tvOS, macOS, and visionOS",Apple Account authentication,Yes
+Apple Account,,gsa.apple.com,443,TCP,"iOS, iPadOS, tvOS, macOS, and visionOS",Apple Account authentication,Yes
+iCloud,,*.apple-cloudkit.com,443,TCP,"iOS, iPadOS, tvOS, macOS, and visionOS",iCloud services,—
+iCloud,,*.apple-livephotoskit.com,443,TCP,"iOS, iPadOS, tvOS, macOS, and visionOS",iCloud services,—
+iCloud,,*.apzones.com,443,TCP,"iOS, iPadOS, tvOS, macOS, and visionOS",iCloud services in China,—
+iCloud,,*.cdn-apple.com,443,TCP,"iOS, iPadOS, tvOS, macOS, and visionOS",iCloud services,—
+iCloud,,*.gc.apple.com,443,TCP,"iOS, iPadOS, tvOS, macOS, and visionOS",iCloud services,—
+iCloud,,*.icloud.com,443,TCP,"iOS, iPadOS, tvOS, macOS, and visionOS",iCloud services,—
+iCloud,,*.icloud.com.cn,443,TCP,"iOS, iPadOS, tvOS, macOS, and visionOS",iCloud services in China,—
+iCloud,,*.icloud.apple.com,443,TCP,"iOS, iPadOS, tvOS, macOS, and visionOS",iCloud services,—
+iCloud,,*.icloud-content.com,443,TCP/UDP,"iOS, iPadOS, tvOS, macOS, and visionOS",iCloud services,—
+iCloud,,*.iwork.apple.com,443,TCP,"iOS, iPadOS, tvOS, macOS, and visionOS",iWork documents,—
+iCloud,,mask.icloud.com,443,UDP,"iOS, iPadOS, macOS, and visionOS",iCloud Private Relay,—
+iCloud,,mask-h2.icloud.com,443,TCP,"iOS, iPadOS, macOS, and visionOS",iCloud Private Relay,—
+iCloud,,mask-api.icloud.com,443,TCP,"iOS, iPadOS, macOS, and visionOS",iCloud Private Relay,Yes
+iCloud,,probe.icloud.com,443,TCP/UDP,"iOS, iPadOS, tvOS, macOS, and visionOS",iCloud connection testing,Yes
+iCloud,,pong.icloud.com,443,TCP/UDP,"iOS, iPadOS, tvOS, macOS, and visionOS",iCloud connection testing,Yes
+iCloud,,metrics.icloud.com,443,TCP/UDP,"iOS, iPadOS, tvOS, macOS, and visionOS",iCloud device diagonostics,Yes
+iCloud,,apple-native-relay.apple.com,443,TCP/UDP,"iOS, iPadOS, tvOS, macOS, and visionOS",RCS,Yes
+iCloud,,*.apple-dns.net,443,TCP/UDP,"iOS, iPadOS, tvOS, macOS, and visionOS",DNS for iCloud services,—
+"Apple Intelligence, Siri, and Search",,guzzoni.apple.com,443,TCP,"iOS, iPadOS, macOS, and visionOS",Siri and dictation requests,—
+"Apple Intelligence, Siri, and Search",,*.smoot.apple.com,443,TCP,"iOS, iPadOS, macOS, and visionOS","Search services, including Siri, Spotlight, Lookup, Safari, News, Messages, and Music",—
+"Apple Intelligence, Siri, and Search",,apple-relay.cloudflare.com,443,"TCP, UDP","iOS, iPadOS, and macOS",Private Cloud Compute,—
+"Apple Intelligence, Siri, and Search",,apple-relay.fastly-edge.com,443,"TCP, UDP","iOS, iPadOS, and macOS",Private Cloud Compute,—
+"Apple Intelligence, Siri, and Search",,cp4.cloudflare.com,443,"TCP, UDP","iOS, iPadOS, and macOS",Private Cloud Compute,—
+"Apple Intelligence, Siri, and Search",,apple-relay.apple.com,443,"TCP, UDP","iOS, iPadOS, and macOS",Apple Intelligence Extensions,—
+Associated Domains,,app-site-association.cdn-apple.com,443,"TCP, UDP","iOS, iPadOS, macOS, and visionOS",Associated domains for universal links,—
+Associated Domains,,app-site-association.networking.apple,443,"TCP, UDP","iOS, iPadOS, macOS, and visionOS",Associated domains for universal links,—
+Tap to Pay on iPhone,,pos-device.apple.com,443,"TCP, UDP",iOS,Tap to Pay on iPhone,Yes
+Tap to Pay on iPhone,,humb.apple.com,443,TCP,iOS,Tap to Pay on iPhone setup,Yes
+Tap to Pay on iPhone,,iphonesubmissions.apple.com,443,TCP,iOS,Optional analytics sharing,Yes
+ID Verifier on iPhone,,smp-device-content.apple.com,443,TCP,iOS,ID Verifier on iPhone,Yes
+ID Verifier on iPhone,,idv.cdn-apple.com,443,TCP,iOS,ID Verifier on iPhone,Yes
+ID Verifier on iPhone,,idv-prod1.apple.com,443,TCP,iOS,ID Verifier on iPhone,Yes
+ID Verifier on iPhone,,humb.apple.com,443,TCP,iOS,ID Verifier on iPhone,Yes

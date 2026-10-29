@@ -1,0 +1,17 @@
+ai-backend-service.docker.com
+api.docker.com
+api.dso.docker.com
+api.offload.docker.com
+auth.docker.com
+auth.docker.io
+cdn.auth0.com
+desktop.docker.com
+dhi.io
+docker-pinata-support.s3.amazonaws.com
+hub.docker.com
+login.docker.com
+notify.bugsnag.com
+production.cloudfront.docker.com
+registry-1.docker.io
+registry.scout.docker.com
+sessions.bugsnag.com

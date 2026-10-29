@@ -1,0 +1,18 @@
+host,url,description
+notify.bugsnag.com,https://notify.bugsnag.com,Error reports
+sessions.bugsnag.com,https://sessions.bugsnag.com,Error reports
+auth.docker.io,https://auth.docker.io,Authentication
+cdn.auth0.com,https://cdn.auth0.com,Authentication
+login.docker.com,https://login.docker.com,Authentication
+auth.docker.com,https://auth.docker.com,Authentication
+desktop.docker.com,https://desktop.docker.com,Update
+hub.docker.com,https://hub.docker.com,Docker Hub
+registry-1.docker.io,https://registry-1.docker.io,Docker Pull/Push
+production.cloudfront.docker.com,https://production.cloudfront.docker.com,Docker Pull/Push
+docker-pinata-support.s3.amazonaws.com,https://docker-pinata-support.s3.amazonaws.com,Troubleshooting
+api.dso.docker.com,https://api.dso.docker.com,Docker Scout service
+api.docker.com,https://api.docker.com,New API
+api.offload.docker.com,https://api.offload.docker.com,Docker Offload
+dhi.io,https://dhi.io,Docker Hardened Images
+registry.scout.docker.com,https://registry.scout.docker.com,Docker Scout registry for DHI attestations
+ai-backend-service.docker.com,https://ai-backend-service.docker.com,[Gordon](/ai/gordon/)

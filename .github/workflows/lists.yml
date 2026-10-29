@@ -1,0 +1,65 @@
+name: Validate and build domain lists
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: '23 5 * * *'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: domain-lists-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: ${{ github.event_name != 'pull_request' }}
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - run: python -m unittest discover -s tests -v
+      - name: Validate local lists on pull requests
+        if: github.event_name == 'pull_request'
+        run: python scripts/build_lists.py --offline
+      - name: Build with external sources
+        if: github.event_name != 'pull_request'
+        run: |
+          python scripts/update_apple.py
+          python scripts/update_docker.py
+          python scripts/update_openshift.py
+          python scripts/build_lists.py
+      - name: Publish updated lists on the default branch
+        if: github.event_name != 'pull_request' && github.ref_name == github.event.repository.default_branch
+        env:
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- lists/allow/apple.txt lists/allow/docker.txt lists/allow/openshift.txt metadata/apple.csv metadata/docker.csv metadata/openshift.csv pihole/
+          if ! git diff --cached --quiet; then
+            git commit -m 'chore: update generated domain lists'
+            git push origin "HEAD:$DEFAULT_BRANCH"
+          fi
+      - uses: actions/upload-artifact@v4
+        with:
+          name: domain-lists
+          path: |
+            dist/*.txt
+            pihole/
+            lists/allow/apple.txt
+            lists/allow/docker.txt
+            lists/allow/openshift.txt
+            metadata/apple.csv
+            metadata/docker.csv
+            metadata/openshift.csv
+          retention-days: 30
