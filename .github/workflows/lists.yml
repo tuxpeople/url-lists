@@ -50,7 +50,7 @@ jobs:
             git commit -m 'chore: update generated domain lists'
             git push origin "HEAD:$DEFAULT_BRANCH"
           fi
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: domain-lists
           path: |
