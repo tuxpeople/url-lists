@@ -198,6 +198,90 @@ Referenz: [CLI](https://docs.pi-hole.net/core/pihole-command/),
 [Import und Gruppen](https://docs.pi-hole.net/guides/whitelist-blacklist/),
 [abonnierte Allowlisten und Prioritäten](https://docs.pi-hole.net/database/domain-database/).
 
+## Regex-Synchronisation mit Pi-hole
+
+`scripts/regex_import.sh` vergleicht heruntergeladene Regex-Listen mit dem
+**aktuellen Pi-hole-Zustand über die JSON-API**. Es liest die Regeln mit
+`docker exec CONTAINER pihole api domains/allow/regex` bzw. `domains/deny/regex`
+aus, ohne `-i`/`-t`. Die Authentifizierung übernimmt die Pi-hole-CLI im Container;
+sie muss dort ohne interaktive Passwortabfrage funktionieren. Auf dem Host werden
+Bash, curl, Docker, jq sowie die üblichen Unix-Werkzeuge benötigt.
+
+**Der normale Aufruf führt Änderungen aus.** `--dry-run` zeigt ausschließlich
+geplante Änderungen und Befehle an. Standardquelle für Allow ist die gemeinsame
+`pihole/allow-regex.txt` mit allen Diensten; für Deny `pihole/block-regex.txt`.
+Die protokollierten Befehle enthalten einzeln für Bash quotierte Argumente;
+ausgeführt wird direkt mit Argument-Arrays, ohne `eval`. Pro Befehl werden
+höchstens 100 Regeln verarbeitet. Erst nach erfolgreich geprüften Ergänzungen
+beginnen Löschungen. Die gesamte Ausgabe enthält auch Überschriften und
+Statusmeldungen und ist nicht als Shellskript gedacht.
+
+```sh
+# Vorschau ohne Änderungen
+bash scripts/regex_import.sh --dry-run
+
+# Gesamte Allow-Regex-Liste im Container pihole synchronisieren
+bash scripts/regex_import.sh
+
+# Anderer Containername
+bash scripts/regex_import.sh --container dns
+
+# Deny-Regeln synchronisieren
+bash scripts/regex_import.sh --type deny
+```
+
+`--url` ist wiederholbar und ersetzt die Standardquellen. Alle ausgewählten Listen
+werden vor dem Vergleich zusammengeführt. Standardmäßig gelten ausschließlich
+Regeln mit dem **exakten Kommentar** `managed by script` als skriptverwaltet;
+mit `--comment TEXT` kann eine andere eindeutige Markierung verwendet werden.
+Diese Markierung beschreibt den gesamten ausgewählten Regelsatz, nicht einzelne
+Quellen. Unterschiedliche unabhängige Abgleiche desselben Regeltyps müssen
+unterschiedliche Markierungen verwenden, sonst würden sie gegenseitig Regeln
+als veraltet einstufen.
+
+Der Abgleich verarbeitet folgende Änderungen:
+
+- Gewünschte Regeln, die in Pi-hole fehlen: hinzufügen, mit unserer Markierung.
+- Eigene Regeln, die nicht mehr in den Quellen stehen: entfernen.
+- Bereits vorhandene Regeln mit anderen oder ohne Kommentare: unverändert lassen,
+  auch wenn dieselbe Regex gewünscht ist. Alle nicht verwalteten Regeln werden
+  separat angezeigt, auch wenn sie in keiner abonnierten Liste vorkommen.
+- Deaktivierte eigene Regeln, die weiterhin gewünscht sind: deaktiviert lassen und
+  gesondert anzeigen. Gruppen und Aktivierungszustand vorhandener Regeln werden
+  nicht verändert. Neue Regeln werden durch die CLI der Default Group zugeordnet.
+
+Es gibt keine lokale Vergleichsdatei mehr. `--state-dir` und `--accept-baseline`
+entfallen; alte Vergleichsdateien werden weder gelesen noch gelöscht. Jeder Lauf
+liest den tatsächlichen Pi-hole-Zustand neu. Bei `--dry-run` zeigt der nächste Lauf daher dieselben geplanten Änderungen
+erneut, solange sich Listen und Istzustand nicht ändern.
+
+Downloads werden mit HTTPS, HTTP-Fehlerprüfung sowie Zeit-/Größenbegrenzung geladen.
+Das Skript normalisiert CRLF/Leerzeilen, validiert das erwartete verankerte
+POSIX-Regex-Format und entfernt Duplikate. Erfolgreiche leere Listen sind zulässig
+und können Löschungen eigener Regeln auslösen. Bei Downloadfehlern oder ungültigen
+API-Antworten wird vor Änderungen abgebrochen. Die API-Antwort muss genau
+ein JSON-Objekt mit einem gültigen `domains`-Array sein; Fehlermeldungen oder
+unvollständige Datensätze werden nicht als leere Liste interpretiert.
+
+Vor jedem Paket wird geprüft, ob sich Regeln, Kommentare, Gruppen oder
+Aktivierungszustände seit der Planung geändert haben. Nach jedem Paket und
+abschließend wird der tatsächliche Zustand erneut abgefragt. Der CLI-Rückgabecode
+allein genügt nicht: Auch ein scheinbar erfolgreicher Befehl mit unvollständigem
+Ergebnis führt zum Abbruch mit Fehlerstatus. Bereits erfolgreiche Änderungen
+werden nicht zurückgerollt; ein erneuter Lauf plant vom tatsächlichen Zustand aus.
+Ein neu hinzugefügter Eintrag muss aktiviert, mit unserer Markierung und der
+Default Group `[0]` vorhanden sein. Andere Zustände gelten als Abweichung.
+
+Eine lokale Verzeichnissperre unter
+`${XDG_STATE_HOME:-$HOME/.local/state}/url-lists/` verhindert parallele schreibende
+Läufe für denselben Container und Regeltyp unter demselben Zustandsverzeichnis.
+Verschiedene Benutzer sollten hierfür dasselbe `XDG_STATE_HOME` verwenden.
+Nach einem harten Prozessabbruch kann ein `regex-sync-*.lock`-Verzeichnis
+zurückbleiben; nur entfernen, wenn kein zugehöriger Lauf aktiv ist. Andere
+Pi-hole-Verwaltungswerkzeuge werden nicht gesperrt. Bei erkannten parallelen
+Änderungen stoppt der Abgleich; die Prüfung und ein CLI-Schreibzugriff sind keine
+atomare Transaktion. Es wird nicht direkt auf die Datenbank zugegriffen.
+
 ## Eigene Listen und weitere Quellen
 
 Unter `lists/allow/` und `lists/block/` können beliebige `.txt`-Dateien ergänzt

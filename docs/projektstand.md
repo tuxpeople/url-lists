@@ -54,8 +54,29 @@ Zustand auf GitHub bei Bedarf PRs und Actions erneut prüfen.
 - Bei Bedarf Apple nach den erhaltenen Kategorien aufteilen.
 - Konkrete cluster-/regionsabhängige OpenShift-Ziele nur mit Angaben zur eigenen
   Umgebung erzeugen. Die globale Liste ersetzt diese Konfiguration nicht.
-- Wildcard-Regeln werden derzeit manuell in Pi-hole gepflegt. Eine automatische
-  Synchronisation ist nicht implementiert.
+- Die Regex-Synchronisation ist implementiert und mit simulierten Docker-Antworten
+  getestet. Der Nutzer hat den ersten echten Allow-Lauf auf `core1` bestätigt:
+  87 Regeln hinzugefügt, keine gelöscht, die manuelle Regel für `tdeutsch.ch`
+  mit Kommentar `Test` erhalten. Die abschließende API-Prüfung meldete
+  `Synchronization verified successfully.` Wiederholung ohne Änderungen und
+  echte Löschungen bzw. Deny-Synchronisation sind damit noch nicht auf dem
+  Zielsystem bestätigt.
+- `scripts/regex_import.sh` verwendet inzwischen den Live-Istzustand über
+  `docker exec CONTAINER pihole api domains/allow/regex` bzw. `domains/deny/regex`,
+  ohne `-i`/`-t`. Host-Abhängigkeiten: Bash, curl, Docker, jq. Standardquellen:
+  gemeinsame Allow- bzw. Block-Regex-Liste. Auswahl über
+  wiederholtes `--url`; Container und Regeltyp über `--container`/`--type`.
+  Nur Regeln mit exakt passender Kommentar-Markierung (`managed by script`,
+  konfigurierbar über `--comment`) werden als eigene Regeln behandelt. Manuelle
+  Regeln und vorhandene Gruppen/Aktivierungszustände bleiben erhalten;
+  deaktivierte gewünschte Regeln werden gemeldet. API-Fehler brechen den Lauf ab.
+  Normaler Aufruf führt Änderungen aus; `--dry-run` liefert nur eine Vorschau.
+  Ergänzungen vor Löschungen, maximal 100 Regeln je Befehl. Vor jedem Paket wird
+  auf externe Änderungen geprüft, danach und abschließend das Ergebnis per API
+  kontrolliert. Bei Teilerfolgen Abbruch; erneuter Lauf plant aus dem Istzustand.
+  Eine lokale Verzeichnissperre verhindert parallele Synchronisationen desselben
+  Containers/Regeltyps unter demselben XDG-Zustandsverzeichnis. Keine lokalen
+  Vergleichsdateien; `--accept-baseline` und `--state-dir` entfallen.
 
 ## Einstieg beim nächsten Mal
 
