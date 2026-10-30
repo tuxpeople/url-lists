@@ -1,0 +1,319 @@
+endpoint_id,category,service_area,service_area_display_name,requirement,network_category,tcp_ports,udp_ports,express_route,notes,target_type,target,export_status
+1,Exchange Online,Exchange,Exchange Online,Required,Optimize,"80,443",443,True,,domain,outlook.cloud.microsoft,exact
+1,Exchange Online,Exchange,Exchange Online,Required,Optimize,"80,443",443,True,,domain,outlook.office.com,exact
+1,Exchange Online,Exchange,Exchange Online,Required,Optimize,"80,443",443,True,,domain,outlook.office365.com,exact
+1,Exchange Online,Exchange,Exchange Online,Required,Optimize,"80,443",443,True,,ip,13.107.6.152/31,metadata-only
+1,Exchange Online,Exchange,Exchange Online,Required,Optimize,"80,443",443,True,,ip,13.107.18.10/31,metadata-only
+1,Exchange Online,Exchange,Exchange Online,Required,Optimize,"80,443",443,True,,ip,13.107.128.0/22,metadata-only
+1,Exchange Online,Exchange,Exchange Online,Required,Optimize,"80,443",443,True,,ip,23.103.160.0/20,metadata-only
+1,Exchange Online,Exchange,Exchange Online,Required,Optimize,"80,443",443,True,,ip,40.96.0.0/13,metadata-only
+1,Exchange Online,Exchange,Exchange Online,Required,Optimize,"80,443",443,True,,ip,40.104.0.0/15,metadata-only
+1,Exchange Online,Exchange,Exchange Online,Required,Optimize,"80,443",443,True,,ip,52.96.0.0/14,metadata-only
+1,Exchange Online,Exchange,Exchange Online,Required,Optimize,"80,443",443,True,,ip,131.253.33.215/32,metadata-only
+1,Exchange Online,Exchange,Exchange Online,Required,Optimize,"80,443",443,True,,ip,132.245.0.0/16,metadata-only
+1,Exchange Online,Exchange,Exchange Online,Required,Optimize,"80,443",443,True,,ip,150.171.32.0/22,metadata-only
+1,Exchange Online,Exchange,Exchange Online,Required,Optimize,"80,443",443,True,,ip,204.79.197.215/32,metadata-only
+1,Exchange Online,Exchange,Exchange Online,Required,Optimize,"80,443",443,True,,ip,2603:1006::/40,metadata-only
+1,Exchange Online,Exchange,Exchange Online,Required,Optimize,"80,443",443,True,,ip,2603:1016::/36,metadata-only
+1,Exchange Online,Exchange,Exchange Online,Required,Optimize,"80,443",443,True,,ip,2603:1026::/36,metadata-only
+1,Exchange Online,Exchange,Exchange Online,Required,Optimize,"80,443",443,True,,ip,2603:1036::/36,metadata-only
+1,Exchange Online,Exchange,Exchange Online,Required,Optimize,"80,443",443,True,,ip,2603:1046::/36,metadata-only
+1,Exchange Online,Exchange,Exchange Online,Required,Optimize,"80,443",443,True,,ip,2603:1056::/36,metadata-only
+1,Exchange Online,Exchange,Exchange Online,Required,Optimize,"80,443",443,True,,ip,2620:1ec:4::152/128,metadata-only
+1,Exchange Online,Exchange,Exchange Online,Required,Optimize,"80,443",443,True,,ip,2620:1ec:4::153/128,metadata-only
+1,Exchange Online,Exchange,Exchange Online,Required,Optimize,"80,443",443,True,,ip,2620:1ec:c::10/128,metadata-only
+1,Exchange Online,Exchange,Exchange Online,Required,Optimize,"80,443",443,True,,ip,2620:1ec:c::11/128,metadata-only
+1,Exchange Online,Exchange,Exchange Online,Required,Optimize,"80,443",443,True,,ip,2620:1ec:d::10/128,metadata-only
+1,Exchange Online,Exchange,Exchange Online,Required,Optimize,"80,443",443,True,,ip,2620:1ec:d::11/128,metadata-only
+1,Exchange Online,Exchange,Exchange Online,Required,Optimize,"80,443",443,True,,ip,2620:1ec:8f0::/46,metadata-only
+1,Exchange Online,Exchange,Exchange Online,Required,Optimize,"80,443",443,True,,ip,2620:1ec:900::/46,metadata-only
+1,Exchange Online,Exchange,Exchange Online,Required,Optimize,"80,443",443,True,,ip,2620:1ec:a92::152/128,metadata-only
+1,Exchange Online,Exchange,Exchange Online,Required,Optimize,"80,443",443,True,,ip,2620:1ec:a92::153/128,metadata-only
+2,Exchange Online,Exchange,Exchange Online,Optional,Allow,"143, 587, 993, 995",,True,"POP3, IMAP4, SMTP Client traffic",domain,outlook.office365.com,exact
+2,Exchange Online,Exchange,Exchange Online,Optional,Allow,"143, 587, 993, 995",,True,"POP3, IMAP4, SMTP Client traffic",domain,smtp.office365.com,exact
+2,Exchange Online,Exchange,Exchange Online,Optional,Allow,"143, 587, 993, 995",,True,"POP3, IMAP4, SMTP Client traffic",ip,13.107.6.152/31,metadata-only
+2,Exchange Online,Exchange,Exchange Online,Optional,Allow,"143, 587, 993, 995",,True,"POP3, IMAP4, SMTP Client traffic",ip,13.107.18.10/31,metadata-only
+2,Exchange Online,Exchange,Exchange Online,Optional,Allow,"143, 587, 993, 995",,True,"POP3, IMAP4, SMTP Client traffic",ip,13.107.128.0/22,metadata-only
+2,Exchange Online,Exchange,Exchange Online,Optional,Allow,"143, 587, 993, 995",,True,"POP3, IMAP4, SMTP Client traffic",ip,23.103.160.0/20,metadata-only
+2,Exchange Online,Exchange,Exchange Online,Optional,Allow,"143, 587, 993, 995",,True,"POP3, IMAP4, SMTP Client traffic",ip,40.96.0.0/13,metadata-only
+2,Exchange Online,Exchange,Exchange Online,Optional,Allow,"143, 587, 993, 995",,True,"POP3, IMAP4, SMTP Client traffic",ip,40.104.0.0/15,metadata-only
+2,Exchange Online,Exchange,Exchange Online,Optional,Allow,"143, 587, 993, 995",,True,"POP3, IMAP4, SMTP Client traffic",ip,52.96.0.0/14,metadata-only
+2,Exchange Online,Exchange,Exchange Online,Optional,Allow,"143, 587, 993, 995",,True,"POP3, IMAP4, SMTP Client traffic",ip,131.253.33.215/32,metadata-only
+2,Exchange Online,Exchange,Exchange Online,Optional,Allow,"143, 587, 993, 995",,True,"POP3, IMAP4, SMTP Client traffic",ip,132.245.0.0/16,metadata-only
+2,Exchange Online,Exchange,Exchange Online,Optional,Allow,"143, 587, 993, 995",,True,"POP3, IMAP4, SMTP Client traffic",ip,150.171.32.0/22,metadata-only
+2,Exchange Online,Exchange,Exchange Online,Optional,Allow,"143, 587, 993, 995",,True,"POP3, IMAP4, SMTP Client traffic",ip,204.79.197.215/32,metadata-only
+2,Exchange Online,Exchange,Exchange Online,Optional,Allow,"143, 587, 993, 995",,True,"POP3, IMAP4, SMTP Client traffic",ip,2603:1006::/40,metadata-only
+2,Exchange Online,Exchange,Exchange Online,Optional,Allow,"143, 587, 993, 995",,True,"POP3, IMAP4, SMTP Client traffic",ip,2603:1016::/36,metadata-only
+2,Exchange Online,Exchange,Exchange Online,Optional,Allow,"143, 587, 993, 995",,True,"POP3, IMAP4, SMTP Client traffic",ip,2603:1026::/36,metadata-only
+2,Exchange Online,Exchange,Exchange Online,Optional,Allow,"143, 587, 993, 995",,True,"POP3, IMAP4, SMTP Client traffic",ip,2603:1036::/36,metadata-only
+2,Exchange Online,Exchange,Exchange Online,Optional,Allow,"143, 587, 993, 995",,True,"POP3, IMAP4, SMTP Client traffic",ip,2603:1046::/36,metadata-only
+2,Exchange Online,Exchange,Exchange Online,Optional,Allow,"143, 587, 993, 995",,True,"POP3, IMAP4, SMTP Client traffic",ip,2603:1056::/36,metadata-only
+2,Exchange Online,Exchange,Exchange Online,Optional,Allow,"143, 587, 993, 995",,True,"POP3, IMAP4, SMTP Client traffic",ip,2620:1ec:4::152/128,metadata-only
+2,Exchange Online,Exchange,Exchange Online,Optional,Allow,"143, 587, 993, 995",,True,"POP3, IMAP4, SMTP Client traffic",ip,2620:1ec:4::153/128,metadata-only
+2,Exchange Online,Exchange,Exchange Online,Optional,Allow,"143, 587, 993, 995",,True,"POP3, IMAP4, SMTP Client traffic",ip,2620:1ec:c::10/128,metadata-only
+2,Exchange Online,Exchange,Exchange Online,Optional,Allow,"143, 587, 993, 995",,True,"POP3, IMAP4, SMTP Client traffic",ip,2620:1ec:c::11/128,metadata-only
+2,Exchange Online,Exchange,Exchange Online,Optional,Allow,"143, 587, 993, 995",,True,"POP3, IMAP4, SMTP Client traffic",ip,2620:1ec:d::10/128,metadata-only
+2,Exchange Online,Exchange,Exchange Online,Optional,Allow,"143, 587, 993, 995",,True,"POP3, IMAP4, SMTP Client traffic",ip,2620:1ec:d::11/128,metadata-only
+2,Exchange Online,Exchange,Exchange Online,Optional,Allow,"143, 587, 993, 995",,True,"POP3, IMAP4, SMTP Client traffic",ip,2620:1ec:8f0::/46,metadata-only
+2,Exchange Online,Exchange,Exchange Online,Optional,Allow,"143, 587, 993, 995",,True,"POP3, IMAP4, SMTP Client traffic",ip,2620:1ec:900::/46,metadata-only
+2,Exchange Online,Exchange,Exchange Online,Optional,Allow,"143, 587, 993, 995",,True,"POP3, IMAP4, SMTP Client traffic",ip,2620:1ec:a92::152/128,metadata-only
+2,Exchange Online,Exchange,Exchange Online,Optional,Allow,"143, 587, 993, 995",,True,"POP3, IMAP4, SMTP Client traffic",ip,2620:1ec:a92::153/128,metadata-only
+8,Exchange Online,Exchange,Exchange Online,Required,Default,"80,443",,False,,domain,*.outlook.com,wildcard
+8,Exchange Online,Exchange,Exchange Online,Required,Default,"80,443",,False,,domain,autodiscover.*.onmicrosoft.com,special-wildcard
+9,Exchange Online,Exchange,Exchange Online,Required,Allow,443,,True,,domain,*.protection.outlook.com,wildcard
+9,Exchange Online,Exchange,Exchange Online,Required,Allow,443,,True,,ip,40.92.0.0/15,metadata-only
+9,Exchange Online,Exchange,Exchange Online,Required,Allow,443,,True,,ip,40.107.0.0/16,metadata-only
+9,Exchange Online,Exchange,Exchange Online,Required,Allow,443,,True,,ip,52.100.0.0/14,metadata-only
+9,Exchange Online,Exchange,Exchange Online,Required,Allow,443,,True,,ip,52.238.78.88/32,metadata-only
+9,Exchange Online,Exchange,Exchange Online,Required,Allow,443,,True,,ip,104.47.0.0/17,metadata-only
+9,Exchange Online,Exchange,Exchange Online,Required,Allow,443,,True,,ip,2a01:111:f400::/48,metadata-only
+9,Exchange Online,Exchange,Exchange Online,Required,Allow,443,,True,,ip,2a01:111:f403::/48,metadata-only
+10,Exchange Online,Exchange,Exchange Online,Required,Allow,25,,True,,domain,*.mail.protection.outlook.com,wildcard
+10,Exchange Online,Exchange,Exchange Online,Required,Allow,25,,True,,domain,*.mx.microsoft,wildcard
+10,Exchange Online,Exchange,Exchange Online,Required,Allow,25,,True,,ip,40.92.0.0/15,metadata-only
+10,Exchange Online,Exchange,Exchange Online,Required,Allow,25,,True,,ip,40.107.0.0/16,metadata-only
+10,Exchange Online,Exchange,Exchange Online,Required,Allow,25,,True,,ip,52.100.0.0/14,metadata-only
+10,Exchange Online,Exchange,Exchange Online,Required,Allow,25,,True,,ip,104.47.0.0/17,metadata-only
+10,Exchange Online,Exchange,Exchange Online,Required,Allow,25,,True,,ip,2a01:111:f400::/48,metadata-only
+10,Exchange Online,Exchange,Exchange Online,Required,Allow,25,,True,,ip,2a01:111:f403::/48,metadata-only
+11,Microsoft Teams,Skype,Microsoft Teams,Required,Optimize,,"3478,3479,3480,3481",True,,ip,52.112.0.0/14,metadata-only
+11,Microsoft Teams,Skype,Microsoft Teams,Required,Optimize,,"3478,3479,3480,3481",True,,ip,52.122.0.0/15,metadata-only
+11,Microsoft Teams,Skype,Microsoft Teams,Required,Optimize,,"3478,3479,3480,3481",True,,ip,2603:1063::/38,metadata-only
+12,Microsoft Teams,Skype,Microsoft Teams,Required,Allow,"80,443",443,True,,domain,*.lync.com,wildcard
+12,Microsoft Teams,Skype,Microsoft Teams,Required,Allow,"80,443",443,True,,domain,*.teams.cloud.microsoft,wildcard
+12,Microsoft Teams,Skype,Microsoft Teams,Required,Allow,"80,443",443,True,,domain,*.teams.microsoft.com,wildcard
+12,Microsoft Teams,Skype,Microsoft Teams,Required,Allow,"80,443",443,True,,domain,teams.cloud.microsoft,exact
+12,Microsoft Teams,Skype,Microsoft Teams,Required,Allow,"80,443",443,True,,domain,teams.microsoft.com,exact
+12,Microsoft Teams,Skype,Microsoft Teams,Required,Allow,"80,443",443,True,,ip,52.112.0.0/14,metadata-only
+12,Microsoft Teams,Skype,Microsoft Teams,Required,Allow,"80,443",443,True,,ip,52.122.0.0/15,metadata-only
+12,Microsoft Teams,Skype,Microsoft Teams,Required,Allow,"80,443",443,True,,ip,2603:1027::/48,metadata-only
+12,Microsoft Teams,Skype,Microsoft Teams,Required,Allow,"80,443",443,True,,ip,2603:1037::/48,metadata-only
+12,Microsoft Teams,Skype,Microsoft Teams,Required,Allow,"80,443",443,True,,ip,2603:1047::/48,metadata-only
+12,Microsoft Teams,Skype,Microsoft Teams,Required,Allow,"80,443",443,True,,ip,2603:1057::/48,metadata-only
+12,Microsoft Teams,Skype,Microsoft Teams,Required,Allow,"80,443",443,True,,ip,2603:1063::/38,metadata-only
+12,Microsoft Teams,Skype,Microsoft Teams,Required,Allow,"80,443",443,True,,ip,2620:1ec:6::/48,metadata-only
+12,Microsoft Teams,Skype,Microsoft Teams,Required,Allow,"80,443",443,True,,ip,2620:1ec:40::/42,metadata-only
+16,Microsoft Teams,Skype,Microsoft Teams,Required,Default,443,,False,,domain,*.keydelivery.mediaservices.windows.net,wildcard
+16,Microsoft Teams,Skype,Microsoft Teams,Required,Default,443,,False,,domain,*.streaming.mediaservices.windows.net,wildcard
+17,Microsoft Teams,Skype,Microsoft Teams,Required,Default,443,,False,,domain,aka.ms,exact
+19,Microsoft Teams,Skype,Microsoft Teams,Optional,Default,"80,443",,False,For end user and customer owned device updates,domain,adl.windows.com,exact
+31,SharePoint Online and OneDrive for Business,SharePoint,SharePoint Online and OneDrive for Business,Required,Optimize,"80,443",443,True,,domain,*.sharepoint.com,wildcard
+31,SharePoint Online and OneDrive for Business,SharePoint,SharePoint Online and OneDrive for Business,Required,Optimize,"80,443",443,True,,ip,13.107.136.0/22,metadata-only
+31,SharePoint Online and OneDrive for Business,SharePoint,SharePoint Online and OneDrive for Business,Required,Optimize,"80,443",443,True,,ip,40.108.128.0/17,metadata-only
+31,SharePoint Online and OneDrive for Business,SharePoint,SharePoint Online and OneDrive for Business,Required,Optimize,"80,443",443,True,,ip,52.104.0.0/14,metadata-only
+31,SharePoint Online and OneDrive for Business,SharePoint,SharePoint Online and OneDrive for Business,Required,Optimize,"80,443",443,True,,ip,104.146.128.0/17,metadata-only
+31,SharePoint Online and OneDrive for Business,SharePoint,SharePoint Online and OneDrive for Business,Required,Optimize,"80,443",443,True,,ip,150.171.40.0/22,metadata-only
+31,SharePoint Online and OneDrive for Business,SharePoint,SharePoint Online and OneDrive for Business,Required,Optimize,"80,443",443,True,,ip,2603:1061:1300::/40,metadata-only
+31,SharePoint Online and OneDrive for Business,SharePoint,SharePoint Online and OneDrive for Business,Required,Optimize,"80,443",443,True,,ip,2603:1063:6000::/35,metadata-only
+31,SharePoint Online and OneDrive for Business,SharePoint,SharePoint Online and OneDrive for Business,Required,Optimize,"80,443",443,True,,ip,2620:1ec:8f8::/46,metadata-only
+31,SharePoint Online and OneDrive for Business,SharePoint,SharePoint Online and OneDrive for Business,Required,Optimize,"80,443",443,True,,ip,2620:1ec:908::/46,metadata-only
+31,SharePoint Online and OneDrive for Business,SharePoint,SharePoint Online and OneDrive for Business,Required,Optimize,"80,443",443,True,,ip,2a01:111:f402::/48,metadata-only
+32,SharePoint Online and OneDrive for Business,SharePoint,SharePoint Online and OneDrive for Business,Optional,Default,443,,False,"OneDrive for Business: supportability, telemetry, APIs, and embedded email links",domain,storage.live.com,exact
+35,SharePoint Online and OneDrive for Business,SharePoint,SharePoint Online and OneDrive for Business,Required,Default,"80,443",,False,,domain,*.wns.windows.com,wildcard
+35,SharePoint Online and OneDrive for Business,SharePoint,SharePoint Online and OneDrive for Business,Required,Default,"80,443",,False,,domain,admin.onedrive.com,exact
+35,SharePoint Online and OneDrive for Business,SharePoint,SharePoint Online and OneDrive for Business,Required,Default,"80,443",,False,,domain,officeclient.microsoft.com,exact
+36,SharePoint Online and OneDrive for Business,SharePoint,SharePoint Online and OneDrive for Business,Required,Default,"80,443",,False,,domain,g.live.com,exact
+36,SharePoint Online and OneDrive for Business,SharePoint,SharePoint Online and OneDrive for Business,Required,Default,"80,443",,False,,domain,oneclient.sfx.ms,exact
+37,SharePoint Online and OneDrive for Business,SharePoint,SharePoint Online and OneDrive for Business,Required,Default,"80,443",,False,,domain,*.sharepointonline.com,wildcard
+37,SharePoint Online and OneDrive for Business,SharePoint,SharePoint Online and OneDrive for Business,Required,Default,"80,443",,False,,domain,spoprod-a.akamaihd.net,exact
+39,SharePoint Online and OneDrive for Business,SharePoint,SharePoint Online and OneDrive for Business,Required,Default,"80,443",,False,,domain,*.svc.ms,wildcard
+46,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,domain,*.officeapps.live.com,wildcard
+46,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,domain,*.online.office.com,wildcard
+46,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,domain,office.live.com,exact
+46,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,ip,13.107.6.171/32,metadata-only
+46,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,ip,13.107.18.15/32,metadata-only
+46,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,ip,13.107.140.6/32,metadata-only
+46,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,ip,52.108.0.0/14,metadata-only
+46,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,ip,52.244.37.168/32,metadata-only
+46,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,ip,2603:1006:1400::/40,metadata-only
+46,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,ip,2603:1016:2400::/40,metadata-only
+46,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,ip,2603:1026:2400::/40,metadata-only
+46,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,ip,2603:1036:2400::/40,metadata-only
+46,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,ip,2603:1046:1400::/40,metadata-only
+46,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,ip,2603:1056:1400::/40,metadata-only
+46,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,ip,2603:1063:2000::/38,metadata-only
+46,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,ip,2620:1ec:c::15/128,metadata-only
+46,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,ip,2620:1ec:8fc::6/128,metadata-only
+46,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,ip,2620:1ec:a92::171/128,metadata-only
+46,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,ip,2a01:111:f100:2000::a83e:3019/128,metadata-only
+46,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,ip,2a01:111:f100:2002::8975:2d79/128,metadata-only
+46,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,ip,2a01:111:f100:2002::8975:2da8/128,metadata-only
+46,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,ip,2a01:111:f100:7000::6fdd:6cd5/128,metadata-only
+46,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,ip,2a01:111:f100:a004::bfeb:88cf/128,metadata-only
+47,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,"443,80",443,False,,domain,*.office.net,wildcard
+49,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,443,,False,,domain,*.onenote.com,wildcard
+50,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Optional,Default,443,,False,OneNote notebooks (wildcards),domain,*.microsoft.com,wildcard
+51,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,443,,False,,domain,*cdn.onenote.net,special-wildcard
+53,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,443,,False,,domain,ajax.aspnetcdn.com,exact
+53,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,443,,False,,domain,apis.live.net,exact
+53,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,443,,False,,domain,officeapps.live.com,exact
+53,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,443,,False,,domain,www.onedrive.com,exact
+56,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,domain,*.auth.microsoft.com,wildcard
+56,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,domain,*.msftidentity.com,wildcard
+56,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,domain,account.activedirectory.windowsazure.com,exact
+56,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,domain,accounts.accesscontrol.windows.net,exact
+56,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,domain,adminwebservice.microsoftonline.com,exact
+56,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,domain,api.passwordreset.microsoftonline.com,exact
+56,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,domain,autologon.microsoftazuread-sso.com,exact
+56,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,domain,ccs.login.microsoftonline.com,exact
+56,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,domain,clientconfig.microsoftonline-p.net,exact
+56,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,domain,companymanager.microsoftonline.com,exact
+56,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,domain,device.login.microsoftonline.com,exact
+56,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,domain,graph.microsoft.com,exact
+56,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,domain,graph.windows.net,exact
+56,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,domain,login-us.microsoftonline.com,exact
+56,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,domain,login.microsoft.com,exact
+56,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,domain,login.microsoftonline-p.com,exact
+56,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,domain,login.microsoftonline.com,exact
+56,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,domain,login.windows.net,exact
+56,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,domain,logincert.microsoftonline.com,exact
+56,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,domain,loginex.microsoftonline.com,exact
+56,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,domain,nexus.microsoftonline-p.com,exact
+56,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,domain,passwordreset.microsoftonline.com,exact
+56,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,ip,20.20.32.0/19,metadata-only
+56,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,ip,20.190.128.0/18,metadata-only
+56,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,ip,20.231.128.0/19,metadata-only
+56,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,ip,40.126.0.0/18,metadata-only
+56,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,ip,2603:1006:2000::/48,metadata-only
+56,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,ip,2603:1007:200::/48,metadata-only
+56,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,ip,2603:1016:1400::/48,metadata-only
+56,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,ip,2603:1017::/48,metadata-only
+56,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,ip,2603:1026:3000::/48,metadata-only
+56,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,ip,2603:1027:1::/48,metadata-only
+56,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,ip,2603:1036:3000::/48,metadata-only
+56,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,ip,2603:1037:1::/48,metadata-only
+56,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,ip,2603:1046:2000::/48,metadata-only
+56,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,ip,2603:1047:1::/48,metadata-only
+56,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,ip,2603:1056:2000::/48,metadata-only
+56,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,"80,443",,True,,ip,2603:1057:2::/48,metadata-only
+59,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,"80,443",,False,,domain,*.hip.live.com,wildcard
+59,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,"80,443",,False,,domain,*.microsoftonline-p.com,wildcard
+59,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,"80,443",,False,,domain,*.microsoftonline.com,wildcard
+59,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,"80,443",,False,,domain,*.msauth.net,wildcard
+59,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,"80,443",,False,,domain,*.msauthimages.net,wildcard
+59,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,"80,443",,False,,domain,*.msecnd.net,wildcard
+59,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,"80,443",,False,,domain,*.msftauth.net,wildcard
+59,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,"80,443",,False,,domain,*.msftauthimages.net,wildcard
+59,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,"80,443",,False,,domain,*.phonefactor.net,wildcard
+59,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,"80,443",,False,,domain,enterpriseregistration.windows.net,exact
+64,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,443,,True,,domain,*.protection.office.com,wildcard
+64,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,443,,True,,domain,*.security.microsoft.com,wildcard
+64,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,443,,True,,domain,compliance.microsoft.com,exact
+64,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,443,,True,,domain,defender.microsoft.com,exact
+64,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,443,,True,,domain,protection.office.com,exact
+64,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,443,,True,,domain,purview.microsoft.com,exact
+64,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,443,,True,,domain,security.microsoft.com,exact
+64,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,443,,True,,ip,13.107.6.192/32,metadata-only
+64,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,443,,True,,ip,13.107.9.192/32,metadata-only
+64,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,443,,True,,ip,2620:1ec:4::192/128,metadata-only
+64,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Allow,443,,True,,ip,2620:1ec:a92::192/128,metadata-only
+66,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,443,,False,,domain,*.portal.cloudappsecurity.com,wildcard
+69,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,443,,False,,domain,*.aria.microsoft.com,wildcard
+69,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,443,,False,,domain,*.events.data.microsoft.com,wildcard
+70,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,443,,False,,domain,*.o365weve.com,wildcard
+70,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,443,,False,,domain,amp.azure.net,exact
+70,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,443,,False,,domain,appsforoffice.microsoft.com,exact
+70,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,443,,False,,domain,auth.gfx.ms,exact
+70,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,443,,False,,domain,c1.microsoft.com,exact
+70,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,443,,False,,domain,dgps.support.microsoft.com,exact
+70,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,443,,False,,domain,docs.microsoft.com,exact
+70,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,443,,False,,domain,msdn.microsoft.com,exact
+70,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,443,,False,,domain,platform.linkedin.com,exact
+70,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,443,,False,,domain,shellprod.msocdn.com,exact
+70,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,443,,False,,domain,technet.microsoft.com,exact
+71,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,"443,80",,False,,domain,*.office365.com,wildcard
+73,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,443,,False,,domain,*.aadrm.com,wildcard
+73,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,443,,False,,domain,*.azurerms.com,wildcard
+73,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,443,,False,,domain,*.informationprotection.azure.com,wildcard
+73,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,443,,False,,domain,ecn.dev.virtualearth.net,exact
+73,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,443,,False,,domain,informationprotection.hosting.portal.azure.net,exact
+75,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Optional,Default,443,,False,"Graph.windows.net, Office 365 Management Pack for Operations Manager, SecureScore, Azure AD Device Registration, Forms, StaffHub, Application Insights, captcha services",domain,*.sharepointonline.com,wildcard
+75,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Optional,Default,443,,False,"Graph.windows.net, Office 365 Management Pack for Operations Manager, SecureScore, Azure AD Device Registration, Forms, StaffHub, Application Insights, captcha services",domain,dc.services.visualstudio.com,exact
+75,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Optional,Default,443,,False,"Graph.windows.net, Office 365 Management Pack for Operations Manager, SecureScore, Azure AD Device Registration, Forms, StaffHub, Application Insights, captcha services",domain,mem.gfx.ms,exact
+78,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Optional,Default,"80,443",,False,Some Office 365 features require endpoints within these domains (including CDNs). Many specific FQDNs within these wildcards have been published recently as we work to either remove or better explain our guidance relating to these wildcards.,domain,*.microsoft.com,wildcard
+78,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Optional,Default,"80,443",,False,Some Office 365 features require endpoints within these domains (including CDNs). Many specific FQDNs within these wildcards have been published recently as we work to either remove or better explain our guidance relating to these wildcards.,domain,*.msocdn.com,wildcard
+78,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Optional,Default,"80,443",,False,Some Office 365 features require endpoints within these domains (including CDNs). Many specific FQDNs within these wildcards have been published recently as we work to either remove or better explain our guidance relating to these wildcards.,domain,*.onmicrosoft.com,wildcard
+79,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,"80,443",,False,,domain,o15.officeredir.microsoft.com,exact
+79,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,"80,443",,False,,domain,officepreviewredir.microsoft.com,exact
+79,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,"80,443",,False,,domain,officeredir.microsoft.com,exact
+79,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,"80,443",,False,,domain,r.office.microsoft.com,exact
+83,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,443,,False,,domain,activation.sls.microsoft.com,exact
+84,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,"80,443",,False,,domain,crl.microsoft.com,exact
+86,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,443,,False,,domain,office15client.microsoft.com,exact
+86,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,443,,False,,domain,officeclient.microsoft.com,exact
+89,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,"80,443",,False,,domain,go.microsoft.com,exact
+91,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,"80,443",,False,,domain,ajax.aspnetcdn.com,exact
+91,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,"80,443",,False,,domain,cdn.odc.officeapps.live.com,exact
+92,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,"80,443",,False,,domain,officecdn.microsoft.com,exact
+92,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,"80,443",,False,,domain,otelrules.azureedge.net,exact
+93,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Optional,Default,"80,443",,False,ProPlus: auxiliary URLs,domain,*.virtualearth.net,wildcard
+93,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Optional,Default,"80,443",,False,ProPlus: auxiliary URLs,domain,c.bing.net,exact
+93,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Optional,Default,"80,443",,False,ProPlus: auxiliary URLs,domain,ocos-office365-s2s.msedge.net,exact
+93,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Optional,Default,"80,443",,False,ProPlus: auxiliary URLs,domain,tse1.mm.bing.net,exact
+93,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Optional,Default,"80,443",,False,ProPlus: auxiliary URLs,domain,www.bing.com,exact
+95,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Optional,Default,443,,False,Outlook for Android and iOS,domain,*.acompli.net,wildcard
+95,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Optional,Default,443,,False,Outlook for Android and iOS,domain,*.outlookmobile.com,wildcard
+96,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Optional,Default,443,,False,Outlook for Android and iOS: Authentication,domain,login.windows-ppe.net,exact
+97,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Optional,Default,443,,False,Outlook for Android and iOS: Consumer Outlook.com and OneDrive integration,domain,account.live.com,exact
+97,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Optional,Default,443,,False,Outlook for Android and iOS: Consumer Outlook.com and OneDrive integration,domain,login.live.com,exact
+114,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Optional,Default,"80,443",,False,Office Mobile URLs,domain,*.appex-rf.msn.com,wildcard
+114,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Optional,Default,"80,443",,False,Office Mobile URLs,domain,*.appex.bing.com,wildcard
+114,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Optional,Default,"80,443",,False,Office Mobile URLs,domain,c.bing.com,exact
+114,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Optional,Default,"80,443",,False,Office Mobile URLs,domain,c.live.com,exact
+114,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Optional,Default,"80,443",,False,Office Mobile URLs,domain,partnerservices.getmicrosoftkey.com,exact
+114,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Optional,Default,"80,443",,False,Office Mobile URLs,domain,signup.live.com,exact
+116,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Optional,Default,"80,443",,False,Office for iPad URLs,domain,account.live.com,exact
+116,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Optional,Default,"80,443",,False,Office for iPad URLs,domain,auth.gfx.ms,exact
+116,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Optional,Default,"80,443",,False,Office for iPad URLs,domain,login.live.com,exact
+117,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Optional,Default,443,,False,Viva Engage,domain,*.yammer.com,wildcard
+117,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Optional,Default,443,,False,Viva Engage,domain,*.yammerusercontent.com,wildcard
+118,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Optional,Default,443,,False,Viva Engage Assets CDN,domain,*.assets-yammer.com,wildcard
+121,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Optional,Default,"80,443",,False,Planner: auxiliary URLs,domain,www.outlook.com,exact
+122,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Optional,Default,443,,False,Sway CDNs,domain,eus-www.sway-cdn.com,exact
+122,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Optional,Default,443,,False,Sway CDNs,domain,eus-www.sway-extensions.com,exact
+122,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Optional,Default,443,,False,Sway CDNs,domain,wus-www.sway-cdn.com,exact
+122,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Optional,Default,443,,False,Sway CDNs,domain,wus-www.sway-extensions.com,exact
+124,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Optional,Default,443,,False,Sway,domain,sway.com,exact
+124,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Optional,Default,443,,False,Sway,domain,www.sway.com,exact
+125,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,"80,443",,False,,domain,*.entrust.net,wildcard
+125,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,"80,443",,False,,domain,*.geotrust.com,wildcard
+125,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,"80,443",,False,,domain,*.omniroot.com,wildcard
+125,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,"80,443",,False,,domain,*.public-trust.com,wildcard
+125,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,"80,443",,False,,domain,*.symcb.com,wildcard
+125,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,"80,443",,False,,domain,*.symcd.com,wildcard
+125,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,"80,443",,False,,domain,*.verisign.com,wildcard
+125,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,"80,443",,False,,domain,*.verisign.net,wildcard
+125,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,"80,443",,False,,domain,cacerts.digicert.com,exact
+125,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,"80,443",,False,,domain,cert.int-x3.letsencrypt.org,exact
+125,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,"80,443",,False,,domain,crl.globalsign.com,exact
+125,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,"80,443",,False,,domain,crl.globalsign.net,exact
+125,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,"80,443",,False,,domain,crl.identrust.com,exact
+125,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,"80,443",,False,,domain,crl3.digicert.com,exact
+125,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,"80,443",,False,,domain,crl4.digicert.com,exact
+125,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,"80,443",,False,,domain,mscrl.microsoft.com,exact
+125,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,"80,443",,False,,domain,ocsp.digicert.com,exact
+125,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,"80,443",,False,,domain,ocsp.globalsign.com,exact
+125,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,"80,443",,False,,domain,ocsp2.globalsign.com,exact
+125,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,"80,443",,False,,domain,ocspx.digicert.com,exact
+125,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,"80,443",,False,,domain,oneocsp.microsoft.com,exact
+125,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,"80,443",,False,,domain,secure.globalsign.com,exact
+125,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,"80,443",,False,,domain,www.digicert.com,exact
+125,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,"80,443",,False,,domain,www.microsoft.com,exact
+126,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Optional,Default,443,,False,"Connection to the speech service is required for Office Dictation features. If connectivity is not allowed, Dictation will be disabled.",domain,officespeech.platform.bing.com,exact
+127,Microsoft Teams,Skype,Microsoft Teams,Required,Default,"80,443",,False,,domain,*.skype.com,wildcard
+147,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,"80,443",,False,,domain,*.office.com,wildcard
+147,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,"80,443",,False,,domain,www.microsoft365.com,exact
+152,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Optional,Default,443,,False,"These endpoints enable the Office Scripts functionality in Office clients available through the Automate tab and the Python in Excel functionality available through the Formulas tab. The Office Scripts feature can also be disabled through the Office 365 Admin portal. For admin controls related to Python in Excel, see [Data security and Python in Excel](https://support.microsoft.com/office/data-security-and-python-in-excel-33cc88a4-4a87-485e-9ff9-f35958278327).",domain,*.microsoftusercontent.com,wildcard
+153,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,443,,False,,domain,*.azure-apim.net,wildcard
+153,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,443,,False,,domain,*.flow.microsoft.com,wildcard
+153,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,443,,False,,domain,*.powerapps.com,wildcard
+153,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,443,,False,,domain,*.powerautomate.com,wildcard
+156,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,443,,False,,domain,*.activity.windows.com,wildcard
+156,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,443,,False,,domain,activity.windows.com,exact
+158,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,443,,False,,domain,*.cortana.ai,wildcard
+159,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,"80,443",,False,,domain,admin.microsoft.com,exact
+160,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,"80,443",,False,,domain,cdn.odc.officeapps.live.com,exact
+160,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,"80,443",,False,,domain,cdn.uci.officeapps.live.com,exact
+184,Microsoft 365 Unified Domains,Common,Microsoft 365 Common and Office Online,Required,Default,443,443,False,,domain,*.cloud.microsoft,wildcard
+193,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,443,443,False,,domain,*.static.microsoft,wildcard
+193,Microsoft 365 Common and Office Online,Common,Microsoft 365 Common and Office Online,Required,Default,443,443,False,,domain,*.usercontent.microsoft,wildcard

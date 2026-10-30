@@ -3,6 +3,8 @@
 Eigene und aus externen Quellen erstellte Allow- und Blocklisten. Python 3.10+
 genügt; es sind keine zusätzlichen Pakete erforderlich.
 
+Für die Weiterarbeit: [Projektstand und offene Punkte](docs/projektstand.md).
+
 ## Apple-Endpunkte
 
 [lists/allow/apple.txt](lists/allow/apple.txt) enthält die eindeutigen Hosts aus
@@ -92,6 +94,50 @@ python3 scripts/update_openshift.py
 python3 scripts/build_lists.py
 ```
 
+## Microsoft-365-Endpunkte
+
+Die [offizielle Übersicht](https://learn.microsoft.com/en-us/microsoft-365/enterprise/urls-and-ip-address-ranges)
+wird aus dem [Microsoft-Endpunkt-Webservice](https://learn.microsoft.com/en-us/microsoft-365/enterprise/microsoft-365-ip-web-service)
+gespeist. Wir verwenden dessen JSON-Daten für **Worldwide einschließlich GCC**;
+China, DoD und GCC High sind nicht enthalten. Required und Optional werden
+gemeinsam aufgenommen.
+
+```text
+https://raw.githubusercontent.com/tuxpeople/url-lists/main/pihole/microsoft365-allow-exact.txt
+```
+
+[metadata/microsoft365.csv](metadata/microsoft365.csv) erhält pro Ziel und
+Endpoint-Set die Überschrift als `category`, `Required`/`Optional` als
+`requirement`, die separate Netzwerkklassifikation `Optimize`/`Allow`/`Default`,
+Service-Area, ID, TCP-/UDP-Ports, ExpressRoute und Hinweise. Die Überschriften sind
+Exchange Online, SharePoint Online and OneDrive for Business, Microsoft Teams,
+Microsoft 365 Common and Office Online sowie Microsoft 365 Unified Domains
+(Endpoint-Set 184). Wiederholte Ziele behalten alle Zuordnungen; ein Ziel kann
+in einem Set Required und in einem anderen Optional sein.
+
+Die vollständige API-Antwort einschließlich IP-Netzen bleibt in
+[metadata/microsoft365.json](metadata/microsoft365.json). IP-Netze werden nicht
+in Pi-hole-Domainlisten aufgenommen. [lists/allow/microsoft365.txt](lists/allow/microsoft365.txt)
+enthält konkrete Hosts und normale `*.`-Wildcards. Die Sondermuster
+`autodiscover.*.onmicrosoft.com` und `*cdn.onenote.net` bleiben in den Metadaten
+und werden zusätzlich in `pihole/microsoft365-allow-regex.txt` und der gemeinsamen
+Regex-Liste exportiert. Die Tenant-Wildcard entspricht einem DNS-Label, die
+Suffix-Wildcard beliebigen Zeichen vor `cdn.onenote.net`. Unbekannte Muster
+brechen die Aktualisierung zur Prüfung ab.
+
+Wie bei den anderen Listen deckt das Abo nur konkrete Hosts ab. Wildcards müssen
+separat als Regex-Regeln gepflegt werden. Es gibt vorerst keine Aufteilung nach
+Dienst oder Required/Optional. Die Überschriften werden aus den Service-Areas
+zugeordnet; neue Service-Areas müssen im Parser ergänzt werden.
+
+```sh
+python3 scripts/update_microsoft365.py
+python3 scripts/build_lists.py
+```
+
+Der tägliche Abruf verwendet eine neu erzeugte ClientRequestId. Manuelle Abrufe
+nicht in kurzen Abständen wiederholen; Microsoft kann sie begrenzen.
+
 ## Pi-hole 6
 
 Die Dateien unter [`pihole/`](pihole/) werden eingecheckt und von GitHub Actions
@@ -112,6 +158,8 @@ steht zur Verfügung, sobald diese Änderungen auf GitHub im Branch `main` liege
 | [apple-allow-exact.txt](pihole/apple-allow-exact.txt) | Apple-Allowlist zum Abonnieren |
 | [docker-allow-exact.txt](pihole/docker-allow-exact.txt) | Docker-Desktop-Allowlist zum Abonnieren |
 | [openshift-allow-exact.txt](pihole/openshift-allow-exact.txt) | Gemeinsame OpenShift-Allowlist zum Abonnieren |
+| [microsoft365-allow-exact.txt](pihole/microsoft365-allow-exact.txt) | Microsoft-365-Allowlist, Required und Optional |
+| [microsoft365-allow-regex.txt](pihole/microsoft365-allow-regex.txt) | Microsoft-365-Wildcards und Sondermuster |
 | [openshift-allow-regex.txt](pihole/openshift-allow-regex.txt) | OpenShift-Wildcards als separate Regex-Regeln |
 | [docker-allow-regex.txt](pihole/docker-allow-regex.txt) | Docker-Wildcards als separate Regex-Regeln; derzeit leer |
 | [allow-exact.txt](pihole/allow-exact.txt) | Gesamte Allowlist zum Abonnieren |
@@ -120,7 +168,7 @@ steht zur Verfügung, sobald diese Änderungen auf GitHub im Branch `main` liege
 | [allow-regex.txt](pihole/allow-regex.txt), [block-regex.txt](pihole/block-regex.txt) | Alle Wildcards als separate Regex-Regeln |
 
 Für die anderen abonnierbaren Dateien den Dateinamen in der Raw-URL ersetzen.
-Apple, Docker und OpenShift sind bereits in der gesamten Allowlist enthalten. Entweder die
+Apple, Docker, OpenShift und Microsoft 365 sind bereits in der gesamten Allowlist enthalten. Entweder die
 gewünschten Einzellisten oder die gesamte Allowlist abonnieren.
 
 **Das Apple-Abo enthält nur konkrete Hosts und deckt die Wildcards nicht ab.**
@@ -132,6 +180,16 @@ werden. Importskripte werden nicht benötigt und nicht mehr erzeugt.
 Die Regex `^([^.]+\.)+push\.apple\.com$` erlaubt beispielsweise
 `a.push.apple.com` und `a.b.push.apple.com`, aber nicht `push.apple.com` selbst.
 Die Exportdateien enthalten keine `*.`-Einträge mehr.
+
+Beim Export werden redundante normale Wildcards pro Liste entfernt: Ist
+`*.microsoft.com` enthalten, entfällt beispielsweise `*.security.microsoft.com`
+in der Regex-Datei. Dabei werden DNS-Labelgrenzen berücksichtigt; `*.notmicrosoft.com`
+bleibt eigenständig. Quelldateien und Metadaten behalten sämtliche Einträge und
+Zuordnungen. Eine spätere gefilterte Liste wird aus diesen vollständigen Daten
+neu bereinigt: Fehlt dort die breite Regel, bleibt die spezifischere erhalten.
+Exakte Domainlisten werden nicht gekürzt, damit sie auch ohne Regex-Regeln
+abonniert werden können. Microsofts zwei Sondermuster bleiben konservativ erhalten;
+beliebige Regex-Ausdrücke werden nicht auf gegenseitige Abdeckung untersucht.
 
 Pi-hole filtert DNS-Namen. Die Ports und Protokolle aus der Apple-CSV bleiben
 Informationen für eine zusätzliche Firewall-Konfiguration.
@@ -181,11 +239,11 @@ Listen geprüft und gebaut.
 
 Der Workflow prüft Pushes und Pull Requests und läuft zusätzlich täglich um
 05:23 UTC sowie auf manuellen Aufruf. Pull Requests verwenden ausschließlich lokale
-Listen. Die anderen Läufe aktualisieren zunächst Apple, Docker und OpenShift und laden danach weitere
+Listen. Die anderen Läufe aktualisieren zunächst Apple, Docker, OpenShift und Microsoft 365 und laden danach weitere
 aktivierte Quellen. Ein erfolgreicher Lauf stellt `domain-lists` für 30 Tage unter
 **Actions → Workflow-Lauf → Artifacts** bereit.
 
-Auf dem Default-Branch committet die Action geänderte Apple-/Docker-/OpenShift-Quelldaten und die
+Auf dem Default-Branch committet die Action geänderte Quelldaten und die
 Exporte unter `pihole/` automatisch. Ohne Änderungen entsteht kein Commit.
 Erst nach erfolgreichem Abruf, Validierung und Build wird veröffentlicht.
 Pull Requests und andere Branches veröffentlichen keine Änderungen.

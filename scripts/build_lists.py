@@ -55,9 +55,17 @@ def download(url):
 def export_pihole(output, name, domains):
     """Export exact domains and strict subdomain-only POSIX ERE rules."""
     exact = sorted(domain for domain in domains if not domain.startswith("*."))
+    wildcard_bases = {domain[2:] for domain in domains if domain.startswith("*.")}
+    # A wildcard covers subdomains at every depth, but never its own base.
+    # Check DNS label boundaries, rather than matching arbitrary string suffixes.
+    minimal_bases = {
+        base for base in wildcard_bases
+        if not any(".".join(base.split(".")[index:]) in wildcard_bases
+                   for index in range(1, len(base.split("."))))
+    }
     regex = sorted(
-        r"^([^.]+\.)+" + domain[2:].replace(".", r"\.") + "$"
-        for domain in domains if domain.startswith("*.")
+        r"^([^.]+\.)+" + base.replace(".", r"\.") + "$"
+        for base in minimal_bases
     )
     output.mkdir(exist_ok=True)
     for suffix, entries in (("exact", exact), ("regex", regex)):
@@ -92,6 +100,11 @@ def build(root=ROOT, offline=False):
     conflicts = result["allow"] & result["block"]
     if conflicts:
         raise ValueError("Allow/block conflict: " + ", ".join(sorted(conflicts)[:20]))
+    microsoft = root / "metadata/microsoft365.json"
+    patterns = set()
+    if microsoft.exists():
+        from update_microsoft365 import extract
+        _, _, patterns = extract(json.loads(microsoft.read_text(encoding="utf-8")))
     # Do not change outputs until every input has passed validation.
     output = root / "dist"
     output.mkdir(exist_ok=True)
@@ -103,11 +116,16 @@ def build(root=ROOT, offline=False):
         temporary.replace(output / f"{kind}.txt")
         print(f"{kind}: {len(domains)} domains")
         export_pihole(root / "pihole", kind, domains)
-    for name in ("apple", "docker", "openshift"):
+    for name in ("apple", "docker", "openshift", "microsoft365"):
         source = root / "lists" / "allow" / f"{name}.txt"
         if source.exists():
             export_pihole(root / "pihole", f"{name}-allow",
                           parse_domains(source.read_text(encoding="utf-8"), source))
+    if patterns:
+        for name in ("microsoft365-allow", "allow"):
+            path = root / "pihole" / f"{name}-regex.txt"
+            combined = set(path.read_text(encoding="utf-8").splitlines()) | patterns
+            path.write_text("".join(pattern + "\n" for pattern in sorted(combined)), encoding="utf-8")
 
 
 if __name__ == "__main__":

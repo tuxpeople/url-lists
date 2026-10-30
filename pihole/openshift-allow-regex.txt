@@ -3,4 +3,3 @@
 ^([^.]+\.)+blob\.core\.windows\.net$
 ^([^.]+\.)+cloudfront\.net$
 ^([^.]+\.)+googleapis\.com$
-^([^.]+\.)+s3\.amazonaws\.com$

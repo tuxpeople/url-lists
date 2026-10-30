@@ -11,6 +11,30 @@ from update_apple import extract
 
 
 class ListsTest(unittest.TestCase):
+    def test_redundant_wildcards_removed_per_export(self):
+        domains = {"*.microsoft.com", "*.security.microsoft.com", "*.a.security.microsoft.com",
+                   "*.notmicrosoft.com", "*.com.example", "security.microsoft.com"}
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory)
+            export_pihole(output, "all", domains)
+            patterns = (output / "all-regex.txt").read_text().splitlines()
+            self.assertEqual(len(patterns), 3)
+            self.assertIn(r"^([^.]+\.)+microsoft\.com$", patterns)
+            self.assertIn(r"^([^.]+\.)+notmicrosoft\.com$", patterns)
+            self.assertEqual((output / "all-exact.txt").read_text(), "security.microsoft.com\n")
+            self.assertEqual(len(domains), 6)
+            # A later filtered export must restore the narrower rule automatically.
+            export_pihole(output, "required", {"*.security.microsoft.com"})
+            self.assertEqual((output / "required-regex.txt").read_text(),
+                             "^([^.]+\\.)+security\\.microsoft\\.com$\n")
+            for host in ("microsoft.com", "security.microsoft.com", "a.microsoft.com",
+                         "a.security.microsoft.com", "a.b.security.microsoft.com",
+                         "a.notmicrosoft.com", "a.com.example", "a.microsoft.com.evil"):
+                before = any(re.search(r"^([^.]+\.)+" + re.escape(domain[2:]) + "$", host)
+                             for domain in domains if domain.startswith("*."))
+                after = any(re.search(pattern, host) for pattern in patterns)
+                self.assertEqual(before, after, host)
+
     def test_pihole_wildcard_scope(self):
         with tempfile.TemporaryDirectory() as directory:
             output = Path(directory)
