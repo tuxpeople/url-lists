@@ -65,6 +65,7 @@
 ^([^.]+\.)+powerautomate\.com$
 ^([^.]+\.)+public-trust\.com$
 ^([^.]+\.)+push\.apple\.com$
+^([^.]+\.)+rmbl\.ws$
 ^([^.]+\.)+school\.apple\.com$
 ^([^.]+\.)+sharepoint\.com$
 ^([^.]+\.)+sharepointonline\.com$

@@ -116,7 +116,7 @@ def build(root=ROOT, offline=False):
         temporary.replace(output / f"{kind}.txt")
         print(f"{kind}: {len(domains)} domains")
         export_pihole(root / "pihole", kind, domains)
-    for name in ("apple", "docker", "openshift", "microsoft365"):
+    for name in ("apple", "docker", "openshift", "microsoft365", "pihole-forum"):
         source = root / "lists" / "allow" / f"{name}.txt"
         if source.exists():
             export_pihole(root / "pihole", f"{name}-allow",

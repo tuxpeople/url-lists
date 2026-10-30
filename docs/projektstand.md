@@ -8,7 +8,7 @@ Stand: 30. Oktober 2026. Technische Details und Bezugsquellen stehen in der
 - Domainlisten für Allow-/Blocklisting sammeln und aus offiziellen Quellen erzeugen.
 - Aktuelles Zielsystem ist Pi-hole 6. Exakte Domains werden über öffentliche
   GitHub-Raw-URLs abonniert; keine Importskripte erzeugen.
-- Apple, Docker Desktop, OpenShift und Microsoft 365 sind implementiert, jeweils einzeln und in
+- Apple, Docker Desktop, OpenShift, Microsoft 365 und das Pi-hole-Forum-Wiki sind implementiert, jeweils einzeln und in
   der gemeinsamen Allowlist unter `pihole/allow-exact.txt` verfügbar.
 - Wildcards bleiben separat als Regex-Regeln erhalten. Sie sind nicht über die
   normalen Pi-hole-Listenabos abgedeckt und werden dort nicht automatisch synchronisiert.
@@ -27,6 +27,11 @@ Stand: 30. Oktober 2026. Technische Details und Bezugsquellen stehen in der
   Endpoint-Set in der CSV erhalten; die vollständigen API-Daten inklusive IP-Netzen
   in JSON. Vorerst eine gemeinsame Liste einschließlich Optional. Zwei besondere
   Wildcard-Muster werden ausschließlich in den Regex-Export aufgenommen.
+- Pi-hole-Forum: ausschließlich Wiki-Post 1 aus Topic 212. Drei Heading-Ebenen
+  bleiben in CSV erhalten. Konkrete Allow-Domains und die explizite Rumble-Wildcard
+  werden exportiert, freie Regex-Empfehlungen nur in Metadaten bewahrt. Die
+  fehlerhaft umgebrochene Google-Sammelzeile wird als redundante Zusammenfassung
+  übersprungen und dokumentiert; keine Ausführung von Quellbefehlen.
 
 ## Umsetzung und Betrieb
 
@@ -87,7 +92,7 @@ python3 scripts/build_lists.py --offline
 git diff --check
 ```
 
-Für einen vollständigen Abruf alle vier `scripts/update_*.py` einzeln ausführen
+Für einen vollständigen Abruf alle fünf `scripts/update_*.py` einzeln ausführen
 und anschließend neu bauen. Microsoft-365-Abrufe nicht in kurzen Abständen wiederholen.
 Danach Änderungen an Listen und Metadaten prüfen; Quellen können sich ändern.
 

@@ -138,6 +138,48 @@ python3 scripts/build_lists.py
 Der tägliche Abruf verwendet eine neu erzeugte ClientRequestId. Manuelle Abrufe
 nicht in kurzen Abständen wiederholen; Microsoft kann sie begrenzen.
 
+## Pi-hole-Forum: Commonly Whitelisted Domains
+
+[lists/allow/pihole-forum.txt](lists/allow/pihole-forum.txt) enthält die
+Domain-Empfehlungen aus dem [Wiki-Hauptbeitrag](https://discourse.pi-hole.net/t/commonly-whitelisted-domains/212).
+Importiert wird ausschließlich Post 1 über die Discourse-JSON-Schnittstelle,
+keine Antworten und keine verlinkten Seiten. Der erste Abruf ergibt 254 konkrete
+Hosts und eine Wildcard (`*.rmbl.ws`). Diese Community-Sammlung ist eine Liste
+von möglichen Ausnahmen bei konkreten Problemen, keine notwendige Grundfreigabe;
+sie enthält auch Werbung, Tracking und Telemetrie sowie ältere Empfehlungen.
+
+```text
+https://raw.githubusercontent.com/tuxpeople/url-lists/main/pihole/pihole-forum-allow-exact.txt
+```
+
+[metadata/pihole-forum.csv](metadata/pihole-forum.csv) erhält alle drei
+Überschriftenebenen als `category`, `subcategory` und `detail`, dazu Zieltyp,
+Ziel, Importstatus und ursprünglichen Befehl. Mehrfachzuordnungen bleiben
+erhalten. Nur Domain-Argumente aus Allow-Befehlen werden extrahiert; Shell-Befehle
+werden niemals ausgeführt. `s{1..5}.symcb.com` wird kontrolliert in fünf Hosts
+aufgelöst. Die redundante Google-Sammelzeile wird mit Status
+`excluded-duplicate-summary` dokumentiert und übersprungen, da sie in der Quelle
+ein umgebrochenes Domainwort enthält. Die Einzelabschnitte bleiben maßgeblich.
+Die ausdrücklich im Rumble-Fließtext empfohlene Wildcard wird ebenfalls übernommen.
+
+Die sieben im Beitrag genannten freien Regex-Ausdrücke bleiben **nur in den
+Metadaten**, zusätzlich in [pihole-forum-regex.txt](metadata/pihole-forum-regex.txt).
+Sie sind keine konkreten Domains und werden nicht automatisch in die laufende
+Regex-Synchronisation übernommen. `pihole/pihole-forum-allow-regex.txt` enthält
+die aus normalen Domain-Wildcards erzeugten Regeln, aktuell nur die für Rumble.
+Konkrete Domains und diese normale Wildcard fließen auch in die gemeinsamen
+Allow-Exporte ein. Die allgemeine Regex-Synchronisation übernimmt daher nach
+Veröffentlichung auch diese zusätzliche Rumble-Regel.
+
+```sh
+python3 scripts/update_pihole_forum.py
+python3 scripts/build_lists.py
+```
+
+Der Workflow aktualisiert diese Quelle täglich wie die anderen Listen. Der
+Parser bricht bei unerwarteten Befehlen, ungültigen Domains oder auffällig
+unvollständigem Inhalt ab.
+
 ## Pi-hole 6
 
 Die Dateien unter [`pihole/`](pihole/) werden eingecheckt und von GitHub Actions
@@ -159,6 +201,8 @@ steht zur Verfügung, sobald diese Änderungen auf GitHub im Branch `main` liege
 | [docker-allow-exact.txt](pihole/docker-allow-exact.txt) | Docker-Desktop-Allowlist zum Abonnieren |
 | [openshift-allow-exact.txt](pihole/openshift-allow-exact.txt) | Gemeinsame OpenShift-Allowlist zum Abonnieren |
 | [microsoft365-allow-exact.txt](pihole/microsoft365-allow-exact.txt) | Microsoft-365-Allowlist, Required und Optional |
+| [pihole-forum-allow-exact.txt](pihole/pihole-forum-allow-exact.txt) | Community-Domainempfehlungen aus dem Wiki |
+| [pihole-forum-allow-regex.txt](pihole/pihole-forum-allow-regex.txt) | Normale Domain-Wildcards des Wikis; freie Regex nur in Metadaten |
 | [microsoft365-allow-regex.txt](pihole/microsoft365-allow-regex.txt) | Microsoft-365-Wildcards und Sondermuster |
 | [openshift-allow-regex.txt](pihole/openshift-allow-regex.txt) | OpenShift-Wildcards als separate Regex-Regeln |
 | [docker-allow-regex.txt](pihole/docker-allow-regex.txt) | Docker-Wildcards als separate Regex-Regeln; derzeit leer |
@@ -168,7 +212,7 @@ steht zur Verfügung, sobald diese Änderungen auf GitHub im Branch `main` liege
 | [allow-regex.txt](pihole/allow-regex.txt), [block-regex.txt](pihole/block-regex.txt) | Alle Wildcards als separate Regex-Regeln |
 
 Für die anderen abonnierbaren Dateien den Dateinamen in der Raw-URL ersetzen.
-Apple, Docker, OpenShift und Microsoft 365 sind bereits in der gesamten Allowlist enthalten. Entweder die
+Apple, Docker, OpenShift, Microsoft 365 und die Forumsliste sind bereits in der gesamten Allowlist enthalten. Entweder die
 gewünschten Einzellisten oder die gesamte Allowlist abonnieren.
 
 **Das Apple-Abo enthält nur konkrete Hosts und deckt die Wildcards nicht ab.**
@@ -323,7 +367,7 @@ Listen geprüft und gebaut.
 
 Der Workflow prüft Pushes und Pull Requests und läuft zusätzlich täglich um
 05:23 UTC sowie auf manuellen Aufruf. Pull Requests verwenden ausschließlich lokale
-Listen. Die anderen Läufe aktualisieren zunächst Apple, Docker, OpenShift und Microsoft 365 und laden danach weitere
+Listen. Die anderen Läufe aktualisieren zunächst Apple, Docker, OpenShift, Microsoft 365 und das Pi-hole-Wiki und laden danach weitere
 aktivierte Quellen. Ein erfolgreicher Lauf stellt `domain-lists` für 30 Tage unter
 **Actions → Workflow-Lauf → Artifacts** bereit.
 

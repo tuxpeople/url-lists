@@ -38,6 +38,7 @@ jobs:
           python scripts/update_docker.py
           python scripts/update_openshift.py
           python scripts/update_microsoft365.py
+          python scripts/update_pihole_forum.py
           python scripts/build_lists.py
       - name: Publish updated lists on the default branch
         if: github.event_name != 'pull_request' && github.ref_name == github.event.repository.default_branch
@@ -46,7 +47,7 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -- lists/allow/apple.txt lists/allow/docker.txt lists/allow/openshift.txt lists/allow/microsoft365.txt metadata/apple.csv metadata/docker.csv metadata/openshift.csv metadata/microsoft365.csv metadata/microsoft365.json pihole/
+          git add -- lists/allow/apple.txt lists/allow/docker.txt lists/allow/openshift.txt lists/allow/microsoft365.txt lists/allow/pihole-forum.txt metadata/apple.csv metadata/docker.csv metadata/openshift.csv metadata/microsoft365.csv metadata/microsoft365.json metadata/pihole-forum.csv metadata/pihole-forum-regex.txt pihole/
           if ! git diff --cached --quiet; then
             git commit -m 'chore: update generated domain lists'
             git push origin "HEAD:$DEFAULT_BRANCH"
@@ -61,9 +62,12 @@ jobs:
             lists/allow/docker.txt
             lists/allow/openshift.txt
             lists/allow/microsoft365.txt
+            lists/allow/pihole-forum.txt
             metadata/apple.csv
             metadata/docker.csv
             metadata/openshift.csv
             metadata/microsoft365.csv
             metadata/microsoft365.json
+            metadata/pihole-forum.csv
+            metadata/pihole-forum-regex.txt
           retention-days: 30
