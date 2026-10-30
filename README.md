@@ -18,9 +18,9 @@ Allowlist Duplikate entfernt. Damit kann die Liste später nach Diensten aufgete
 werden. Auch dort genannte
 Drittanbieter sind enthalten. Verlinkte weiterführende Artikel werden nicht importiert.
 
-Wildcards bleiben als `*.example.com` erhalten. Sie werden weder aufgelöst noch
-in eine Freigabe der Hauptdomain umgewandelt. Das Zielsystem muss dieses Format
-unterstützen. Die Gesamtliste umfasst auch optionale Dienste; die passende Auswahl
+In den Quelldateien bleiben Wildcards als `*.example.com` erhalten. Der Pi-hole-
+Allow-Export wandelt sie in `@@||example.com^` um und erlaubt damit bewusst die
+Hauptdomain samt allen Subdomains. Die Gesamtliste umfasst auch optionale Dienste; die passende Auswahl
 hängt von der eigenen Umgebung ab. Die Textdatei allein enthält keine Portregeln.
 Apple weist außerdem darauf hin, dass HTTPS-Interception für diese Dienste
 Verbindungsfehler verursachen kann (siehe Originalquelle).
@@ -56,8 +56,8 @@ python3 scripts/build_lists.py
 
 Der Parser übernimmt nur die Domain-Tabelle. Fehlende Tabellen, weniger als zehn
 Hosts, fehlende zentrale Registry-/Authentifizierungs-Hosts sowie unerwartete
-URL-Formate führen zum Abbruch. Mögliche künftige Wildcards werden separat als
-Regex exportiert und sind nicht Teil der abonnierbaren Domainliste.
+URL-Formate führen zum Abbruch. Mögliche künftige normale `*.`-Wildcards werden
+als ABP-Allow-Regeln in die abonnierbare Liste aufgenommen.
 
 ## OpenShift-Endpunkte
 
@@ -72,10 +72,10 @@ https://raw.githubusercontent.com/tuxpeople/url-lists/main/pihole/openshift-allo
 ```
 
 Der erste Abruf enthält 59 Tabellenzeilen und ergibt 47 eindeutige Hosts bzw.
-Wildcard-Einträge. Die konkreten Hosts sind abonnierbar; Wildcards stehen separat
-in [openshift-allow-regex.txt](pihole/openshift-allow-regex.txt). Insbesondere die
-Cloud-Wildcards sind weitreichend und sollten nur nach Bedarf als Regeln ergänzt
-werden. Wildcard-Vorschläge aus dem Fließtext werden nicht zusätzlich übernommen.
+Wildcard-Einträge. Konkrete Hosts und normale Wildcards stehen gemeinsam in der
+abonnierbaren Allowlist. Insbesondere die Cloud-Wildcards umfassen viele Dienste;
+die Gesamtliste enthält sie einschließlich ihrer Hauptdomains. Wildcard-Vorschläge
+aus dem Fließtext werden nicht zusätzlich übernommen.
 
 [metadata/openshift.csv](metadata/openshift.csv) erhält Kategorie, Cloud-Anbieter,
 AsciiDoc-Bedingungen, Originalziel, Port und Beschreibung für eine spätere
@@ -125,8 +125,8 @@ Regex-Liste exportiert. Die Tenant-Wildcard entspricht einem DNS-Label, die
 Suffix-Wildcard beliebigen Zeichen vor `cdn.onenote.net`. Unbekannte Muster
 brechen die Aktualisierung zur Prüfung ab.
 
-Wie bei den anderen Listen deckt das Abo nur konkrete Hosts ab. Wildcards müssen
-separat als Regex-Regeln gepflegt werden. Es gibt vorerst keine Aufteilung nach
+Normale `*.`-Wildcards sind als ABP-Regeln im Abo enthalten. Nur die beiden
+Sondermuster benötigen weiterhin Regex-Regeln. Es gibt vorerst keine Aufteilung nach
 Dienst oder Required/Optional. Die Überschriften werden aus den Service-Areas
 zugeordnet; neue Service-Areas müssen im Parser ergänzt werden.
 
@@ -165,11 +165,10 @@ Die ausdrücklich im Rumble-Fließtext empfohlene Wildcard wird ebenfalls übern
 Die sieben im Beitrag genannten freien Regex-Ausdrücke bleiben **nur in den
 Metadaten**, zusätzlich in [pihole-forum-regex.txt](metadata/pihole-forum-regex.txt).
 Sie sind keine konkreten Domains und werden nicht automatisch in die laufende
-Regex-Synchronisation übernommen. `pihole/pihole-forum-allow-regex.txt` enthält
-die aus normalen Domain-Wildcards erzeugten Regeln, aktuell nur die für Rumble.
-Konkrete Domains und diese normale Wildcard fließen auch in die gemeinsamen
-Allow-Exporte ein. Die allgemeine Regex-Synchronisation übernimmt daher nach
-Veröffentlichung auch diese zusätzliche Rumble-Regel.
+Regex-Synchronisation übernommen. Die Rumble-Wildcard steht als `@@||rmbl.ws^`
+in der abonnierbaren Liste und gibt damit `rmbl.ws` samt Subdomains frei.
+Konkrete Domains und diese ABP-Regel fließen auch in den gemeinsamen Allow-Export
+ein. Die Forum-Allow-Regex-Datei ist leer.
 
 ```sh
 python3 scripts/update_pihole_forum.py
@@ -202,38 +201,63 @@ steht zur Verfügung, sobald diese Änderungen auf GitHub im Branch `main` liege
 | [openshift-allow-exact.txt](pihole/openshift-allow-exact.txt) | Gemeinsame OpenShift-Allowlist zum Abonnieren |
 | [microsoft365-allow-exact.txt](pihole/microsoft365-allow-exact.txt) | Microsoft-365-Allowlist, Required und Optional |
 | [pihole-forum-allow-exact.txt](pihole/pihole-forum-allow-exact.txt) | Community-Domainempfehlungen aus dem Wiki |
-| [pihole-forum-allow-regex.txt](pihole/pihole-forum-allow-regex.txt) | Normale Domain-Wildcards des Wikis; freie Regex nur in Metadaten |
-| [microsoft365-allow-regex.txt](pihole/microsoft365-allow-regex.txt) | Microsoft-365-Wildcards und Sondermuster |
-| [openshift-allow-regex.txt](pihole/openshift-allow-regex.txt) | OpenShift-Wildcards als separate Regex-Regeln |
-| [docker-allow-regex.txt](pihole/docker-allow-regex.txt) | Docker-Wildcards als separate Regex-Regeln; derzeit leer |
+| [pihole-forum-allow-regex.txt](pihole/pihole-forum-allow-regex.txt) | Leer; freie Regex des Wikis nur in Metadaten |
+| [microsoft365-allow-regex.txt](pihole/microsoft365-allow-regex.txt) | Nur die beiden Microsoft-365-Sondermuster |
+| [openshift-allow-regex.txt](pihole/openshift-allow-regex.txt) | Leer; normale Wildcards im Listenabo |
+| [docker-allow-regex.txt](pihole/docker-allow-regex.txt) | Leer |
 | [allow-exact.txt](pihole/allow-exact.txt) | Gesamte Allowlist zum Abonnieren |
 | [block-exact.txt](pihole/block-exact.txt) | Gesamte Blocklist zum Abonnieren; anfangs leer |
-| [apple-allow-regex.txt](pihole/apple-allow-regex.txt) | Apples Wildcards als separate Regex-Allow-Regeln |
-| [allow-regex.txt](pihole/allow-regex.txt), [block-regex.txt](pihole/block-regex.txt) | Alle Wildcards als separate Regex-Regeln |
+| [apple-allow-regex.txt](pihole/apple-allow-regex.txt) | Leer; normale Wildcards im Listenabo |
+| [allow-regex.txt](pihole/allow-regex.txt), [block-regex.txt](pihole/block-regex.txt) | Allow: Sondermuster; Block: normale Wildcard-Regex |
 
 Für die anderen abonnierbaren Dateien den Dateinamen in der Raw-URL ersetzen.
 Apple, Docker, OpenShift, Microsoft 365 und die Forumsliste sind bereits in der gesamten Allowlist enthalten. Entweder die
 gewünschten Einzellisten oder die gesamte Allowlist abonnieren.
 
-**Das Apple-Abo enthält nur konkrete Hosts und deckt die Wildcards nicht ab.**
-Die Zeilen aus `apple-allow-regex.txt` bei Bedarf im Webinterface unter
-**Domains** als erlaubte Regex-Regeln hinzufügen. Diese Regeln werden durch das
-Listenabo nicht aktualisiert. Regex-Dateien dürfen nicht als Liste abonniert
-werden. Importskripte werden nicht benötigt und nicht mehr erzeugt.
+Die bisherigen Allow-Dateinamen `*-exact.txt` bleiben für bereits eingerichtete
+Abonnements erhalten. **Sie enthalten jetzt konkrete Domains und ABP-Regeln**:
 
-Die Regex `^([^.]+\.)+push\.apple\.com$` erlaubt beispielsweise
-`a.push.apple.com` und `a.b.push.apple.com`, aber nicht `push.apple.com` selbst.
-Die Exportdateien enthalten keine `*.`-Einträge mehr.
+```text
+login.microsoftonline.com
+@@||microsoft.com^
+```
 
-Beim Export werden redundante normale Wildcards pro Liste entfernt: Ist
-`*.microsoft.com` enthalten, entfällt beispielsweise `*.security.microsoft.com`
-in der Regex-Datei. Dabei werden DNS-Labelgrenzen berücksichtigt; `*.notmicrosoft.com`
-bleibt eigenständig. Quelldateien und Metadaten behalten sämtliche Einträge und
-Zuordnungen. Eine spätere gefilterte Liste wird aus diesen vollständigen Daten
-neu bereinigt: Fehlt dort die breite Regel, bleibt die spezifischere erhalten.
-Exakte Domainlisten werden nicht gekürzt, damit sie auch ohne Regex-Regeln
-abonniert werden können. Microsofts zwei Sondermuster bleiben konservativ erhalten;
-beliebige Regex-Ausdrücke werden nicht auf gegenseitige Abdeckung untersucht.
+Ein konkreter Host bleibt exakt; `@@||microsoft.com^` erlaubt dagegen sowohl
+`microsoft.com` als auch beliebig tiefe Subdomains. Diese Regeln werden als
+**Allowlist abonniert**, nicht unter Domains als Regex eingetragen. Aus dem
+Quelldomain-Eintrag `*.example.com` entsteht bewusst eine Freigabe einschließlich
+der Hauptdomain. In Quellen und Metadaten bleibt die ursprüngliche Schreibweise
+mit allen Kategoriezuordnungen vollständig erhalten.
+
+Individuelle exakte Deny-Regeln haben Vorrang vor abonnierten Allowlisten.
+Damit können einzelne Hosts trotz einer breiten Domainfreigabe gesperrt werden.
+Individuelle Regex-Allow-Regeln haben dagegen Vorrang vor exakten Deny-Regeln;
+das gilt weiterhin für die beiden verbliebenen Microsoft-Sondermuster.
+
+Redundante normale Wildcards werden pro Export entfernt: Neben `*.microsoft.com`
+wird `*.security.microsoft.com` nicht zusätzlich ausgegeben. DNS-Labelgrenzen
+werden berücksichtigt; `*.notmicrosoft.com` bleibt eigenständig. Gefilterte
+Exporte werden aus den vollständigen Quelldaten neu bereinigt. Exakte Hosts
+bleiben erhalten. Block-Exporte verwenden weiterhin exakte Domains und separate
+Subdomain-Regex-Regeln; ihre Semantik wird nicht verändert.
+
+### Umstellung bestehender Installationen
+
+1. Die Änderungen nach GitHub veröffentlichen. Die bestehenden Allow-Abonnement-
+   URLs bleiben gleich; für die Gesamtliste ist es
+   `https://raw.githubusercontent.com/tuxpeople/url-lists/main/pihole/allow-exact.txt`.
+2. In Pi-hole Gravity aktualisieren und prüfen, dass die aktualisierte Allowlist
+   samt ABP-Einträgen erfolgreich übernommen und der gewünschten Gruppe zugeordnet ist.
+3. `bash scripts/regex_import.sh --dry-run` ausführen. Die normalen eigenen
+   Wildcard-Regex-Regeln sollten als zu entfernen erscheinen; nur Sondermuster bleiben.
+4. Mit `bash scripts/regex_import.sh` die veralteten skriptverwalteten Regeln entfernen.
+   Manuelle Regex-Regeln werden nicht gelöscht. Eventuell manuell angelegte breite
+   Regex-Allow-Regeln müssen separat geprüft werden, da sie exakte Sperren weiter überstimmen.
+
+Die Allow-Regex-Dateien bleiben verfügbar, auch wenn sie leer sind, damit bestehende
+Synchronisationen entfernte Regeln erkennen und aufräumen können. Die beiden
+Microsoft-Sondermuster können weiterhin über den Regex-Abgleich verwaltet werden.
+Regex-Dateien sind weiterhin keine abonnierbaren Domainlisten.
 
 Pi-hole filtert DNS-Namen. Die Ports und Protokolle aus der Apple-CSV bleiben
 Informationen für eine zusätzliche Firewall-Konfiguration.
@@ -253,7 +277,7 @@ Bash, curl, Docker, jq sowie die üblichen Unix-Werkzeuge benötigt.
 
 **Der normale Aufruf führt Änderungen aus.** `--dry-run` zeigt ausschließlich
 geplante Änderungen und Befehle an. Standardquelle für Allow ist die gemeinsame
-`pihole/allow-regex.txt` mit allen Diensten; für Deny `pihole/block-regex.txt`.
+`pihole/allow-regex.txt` mit den verbliebenen Sondermustern; für Deny `pihole/block-regex.txt`.
 Die protokollierten Befehle enthalten einzeln für Bash quotierte Argumente;
 ausgeführt wird direkt mit Argument-Arrays, ohne `eval`. Pro Befehl werden
 höchstens 100 Regeln verarbeitet. Erst nach erfolgreich geprüften Ergänzungen

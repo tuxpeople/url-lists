@@ -17,35 +17,54 @@ class ListsTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             output = Path(directory)
             export_pihole(output, "all", domains)
-            patterns = (output / "all-regex.txt").read_text().splitlines()
-            self.assertEqual(len(patterns), 3)
-            self.assertIn(r"^([^.]+\.)+microsoft\.com$", patterns)
-            self.assertIn(r"^([^.]+\.)+notmicrosoft\.com$", patterns)
-            self.assertEqual((output / "all-exact.txt").read_text(), "security.microsoft.com\n")
+            entries = set((output / "all-exact.txt").read_text().splitlines())
+            self.assertEqual(entries, {"@@||microsoft.com^", "@@||notmicrosoft.com^",
+                                       "@@||com.example^", "security.microsoft.com"})
+            self.assertEqual((output / "all-regex.txt").read_text(), "")
             self.assertEqual(len(domains), 6)
-            # A later filtered export must restore the narrower rule automatically.
+            # Filtering precedes minimization, so the narrower rule is restored.
             export_pihole(output, "required", {"*.security.microsoft.com"})
-            self.assertEqual((output / "required-regex.txt").read_text(),
-                             "^([^.]+\\.)+security\\.microsoft\\.com$\n")
-            for host in ("microsoft.com", "security.microsoft.com", "a.microsoft.com",
-                         "a.security.microsoft.com", "a.b.security.microsoft.com",
-                         "a.notmicrosoft.com", "a.com.example", "a.microsoft.com.evil"):
-                before = any(re.search(r"^([^.]+\.)+" + re.escape(domain[2:]) + "$", host)
-                             for domain in domains if domain.startswith("*."))
-                after = any(re.search(pattern, host) for pattern in patterns)
-                self.assertEqual(before, after, host)
+            self.assertEqual((output / "required-exact.txt").read_text(),
+                             "@@||security.microsoft.com^\n")
 
-    def test_pihole_wildcard_scope(self):
+    def test_pihole_allow_wildcard_includes_base_and_subdomains(self):
         with tempfile.TemporaryDirectory() as directory:
             output = Path(directory)
             export_pihole(output, "apple-allow", {"*.push.apple.com", "albert.apple.com"})
-            pattern = (output / "apple-allow-regex.txt").read_text().strip()
-            for domain in ("a.push.apple.com", "a.b.push.apple.com"):
-                self.assertIsNotNone(re.search(pattern, domain))
-            for domain in ("push.apple.com", "evilpush.apple.com", "a.push.apple.com.evil", "a.pushXapple.com"):
-                self.assertIsNone(re.search(pattern, domain))
-            self.assertEqual((output / "apple-allow-exact.txt").read_text(), "albert.apple.com\n")
+            self.assertEqual((output / "apple-allow-exact.txt").read_text(),
+                             "@@||push.apple.com^\nalbert.apple.com\n")
+            self.assertEqual((output / "apple-allow-regex.txt").read_text(), "")
             self.assertEqual(sorted(path.suffix for path in output.iterdir()), [".txt", ".txt"])
+
+    def test_deny_wildcards_keep_subdomain_only_regex(self):
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory)
+            export_pihole(output, "block", {"*.example.com", "*.child.example.com", "exact.example.org"}, kind="block")
+            pattern = (output / "block-regex.txt").read_text().strip()
+            self.assertEqual(pattern, r"^([^.]+\.)+example\.com$")
+            self.assertEqual((output / "block-exact.txt").read_text(), "exact.example.org\n")
+            self.assertIsNotNone(re.search(pattern, "a.b.example.com"))
+            self.assertIsNone(re.search(pattern, "example.com"))
+            self.assertIsNone(re.search(pattern, "notexample.com"))
+
+    def test_microsoft_special_regex_survives_build(self):
+        from update_microsoft365 import SPECIAL
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "sources.json").write_text('{"sources": []}')
+            (root / "metadata").mkdir()
+            # Real checked-in API snapshot verifies integration of both export paths.
+            snapshot = Path(__file__).resolve().parents[1] / "metadata/microsoft365.json"
+            data = json.loads(snapshot.read_text())
+            (root / "metadata/microsoft365.json").write_text(json.dumps(data))
+            for kind in ("allow", "block"):
+                (root / "lists" / kind).mkdir(parents=True)
+            (root / "lists/allow/microsoft365.txt").write_text("*.microsoft.com\nlogin.microsoftonline.com\n")
+            build(root, offline=True)
+            for name in ("allow", "microsoft365-allow"):
+                self.assertEqual(set((root / f"pihole/{name}-regex.txt").read_text().splitlines()),
+                                 set(SPECIAL.values()))
+                self.assertIn("@@||microsoft.com^", (root / f"pihole/{name}-exact.txt").read_text().splitlines())
 
     def test_normalization(self):
         self.assertEqual(parse_domains("EXAMPLE.com.\nexample.com # comment\n*.Example.org", "test"),

@@ -294,3 +294,17 @@ else:
         self.assertIn("Another sync holds the lock", result.stderr)
         self.assertTrue(lock.is_dir())
         self.assertFalse((self.root / "docker-calls").exists())
+
+    def test_migration_removes_old_subdomain_regex_and_keeps_specials_and_manual(self):
+        from update_microsoft365 import SPECIAL
+        special = sorted(SPECIAL.values())
+        manual = self.rule(r"(\.|^)tdeutsch\.ch$", "Test")
+        old = r"^([^.]+\.)+microsoft\.com$"
+        self.write_api([self.rule(old), *(self.rule(pattern) for pattern in special), manual])
+        (self.root / "allow-regex.txt").write_text("\n".join(special) + "\n")
+        result = self.run_script(live=True)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(self.commands(result), [["docker", "exec", "pihole", "pihole",
+                                                 "--allow-regex", "remove", old]])
+        self.assertEqual({row["domain"] for row in json.loads(self.api.read_text())["domains"]},
+                         {*special, manual["domain"]})

@@ -1,6 +1,11 @@
 1.rhel.pool.ntp.org
 2.rhel.pool.ntp.org
 3.rhel.pool.ntp.org
+@@||aliyuncs.com^
+@@||amazonaws.com^
+@@||blob.core.windows.net^
+@@||cloudfront.net^
+@@||googleapis.com^
 access.redhat.com
 accounts.google.com
 api.access.redhat.com

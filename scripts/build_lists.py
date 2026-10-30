@@ -52,23 +52,31 @@ def download(url):
     return data.decode("utf-8-sig")
 
 
-def export_pihole(output, name, domains):
-    """Export exact domains and strict subdomain-only POSIX ERE rules."""
-    exact = sorted(domain for domain in domains if not domain.startswith("*."))
+def export_pihole(output, name, domains, kind="allow"):
+    """Export allow wildcards as ABP subscriptions; retain deny regex behavior."""
+    if kind not in {"allow", "block"}:
+        raise ValueError(f"Invalid export type: {kind}")
+    exact = {domain for domain in domains if not domain.startswith("*.")}
     wildcard_bases = {domain[2:] for domain in domains if domain.startswith("*.")}
-    # A wildcard covers subdomains at every depth, but never its own base.
+    # Remove wildcards covered by an ancestor, respecting DNS label boundaries.
     # Check DNS label boundaries, rather than matching arbitrary string suffixes.
     minimal_bases = {
         base for base in wildcard_bases
         if not any(".".join(base.split(".")[index:]) in wildcard_bases
                    for index in range(1, len(base.split("."))))
     }
-    regex = sorted(
-        r"^([^.]+\.)+" + base.replace(".", r"\.") + "$"
-        for base in minimal_bases
-    )
+    if kind == "allow":
+        # Keep the existing subscription filename for already configured clients.
+        # ABP includes the base domain as well as all subdomains, intentionally.
+        exact.update(f"@@||{base}^" for base in minimal_bases)
+        regex = []
+    else:
+        regex = sorted(
+            r"^([^.]+\.)+" + base.replace(".", r"\.") + "$"
+            for base in minimal_bases
+        )
     output.mkdir(exist_ok=True)
-    for suffix, entries in (("exact", exact), ("regex", regex)):
+    for suffix, entries in (("exact", sorted(exact)), ("regex", regex)):
         (output / f"{name}-{suffix}.txt").write_text(
             "".join(entry + "\n" for entry in entries), encoding="utf-8"
         )
@@ -115,7 +123,7 @@ def build(root=ROOT, offline=False):
             temporary = Path(handle.name)
         temporary.replace(output / f"{kind}.txt")
         print(f"{kind}: {len(domains)} domains")
-        export_pihole(root / "pihole", kind, domains)
+        export_pihole(root / "pihole", kind, domains, kind=kind)
     for name in ("apple", "docker", "openshift", "microsoft365", "pihole-forum"):
         source = root / "lists" / "allow" / f"{name}.txt"
         if source.exists():

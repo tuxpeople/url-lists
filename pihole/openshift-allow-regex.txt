@@ -1,5 +1,0 @@
-^([^.]+\.)+aliyuncs\.com$
-^([^.]+\.)+amazonaws\.com$
-^([^.]+\.)+blob\.core\.windows\.net$
-^([^.]+\.)+cloudfront\.net$
-^([^.]+\.)+googleapis\.com$

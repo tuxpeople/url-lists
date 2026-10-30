@@ -6,16 +6,23 @@ Stand: 30. Oktober 2026. Technische Details und Bezugsquellen stehen in der
 ## Ziel und getroffene Entscheidungen
 
 - Domainlisten für Allow-/Blocklisting sammeln und aus offiziellen Quellen erzeugen.
-- Aktuelles Zielsystem ist Pi-hole 6. Exakte Domains werden über öffentliche
-  GitHub-Raw-URLs abonniert; keine Importskripte erzeugen.
+- Aktuelles Zielsystem ist Pi-hole 6. Allowlisten aus konkreten Domains und
+  ABP-Regeln werden über öffentliche GitHub-Raw-URLs abonniert. Die bestehenden
+  `*-exact.txt`-URLs bleiben trotz des gemischten Formats erhalten.
 - Apple, Docker Desktop, OpenShift, Microsoft 365 und das Pi-hole-Forum-Wiki sind implementiert, jeweils einzeln und in
   der gemeinsamen Allowlist unter `pihole/allow-exact.txt` verfügbar.
-- Wildcards bleiben separat als Regex-Regeln erhalten. Sie sind nicht über die
-  normalen Pi-hole-Listenabos abgedeckt und werden dort nicht automatisch synchronisiert.
-- Pi-hole-Regex-Exporte entfernen pro Liste normale Wildcards, die durch eine
-  breitere normale Wildcard abgedeckt sind. Quelldaten/Metadaten bleiben vollständig;
-  exakte Hosts und Microsofts Sondermuster werden nicht gekürzt. Bei späteren
-  Aufteilungen die Bereinigung immer erst nach der Auswahl anwenden.
+- Normale Allow-Wildcards werden als `@@||domain^` im Listenabo exportiert,
+  einschließlich der Hauptdomain und aller Subdomains. Das ist ausdrücklich
+  gewünscht, ebenso die niedrigere Priorität gegenüber individuellen exakten
+  Deny-Regeln. Normale Allow-Wildcards stehen nicht mehr in Regex-Exporten.
+  Nur Microsofts Sondermuster bleiben dort. Block-Exporte behalten ihre Semantik.
+- Redundante normale Wildcards werden pro Export entfernt. Quelldaten/Metadaten
+  bleiben vollständig; bei Aufteilungen erst auswählen, dann bereinigen.
+- Migration: zuerst veröffentlichte Allowlisten per Gravity aktualisieren und
+  Übernahme prüfen, danach den Regex-Abgleich ausführen. Dieser entfernt alte
+  eigene Wildcard-Regex-Regeln. Leere Regex-Dateien bleiben hierfür verfügbar.
+  Manuelle Regex-Regeln bleiben unangetastet und können exakte Sperren weiterhin
+  überstimmen. Die Umstellung auf dem Zielsystem ist noch nicht bestätigt.
 - OpenShift bleibt vorerst eine gemeinsame Liste. Eine spätere Aufteilung wird
   noch erwogen; keine Kategorien eigenständig ausschließen.
 - Apple-Kategorien und Unterkategorien sowie OpenShift-Kategorien, Cloud-Anbieter
