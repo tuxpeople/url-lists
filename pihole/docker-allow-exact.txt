@@ -2,6 +2,7 @@ ai-backend-service.docker.com
 api.docker.com
 api.dso.docker.com
 api.offload.docker.com
+api.sandboxes-cloud.docker.com
 auth.docker.com
 auth.docker.io
 cdn.auth0.com

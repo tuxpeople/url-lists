@@ -124,6 +124,7 @@ api.facebook.com
 api.offload.docker.com
 api.openshift.com
 api.passwordreset.microsoftonline.com
+api.sandboxes-cloud.docker.com
 api.twitter.com
 apis.live.net
 app-site-association.cdn-apple.com

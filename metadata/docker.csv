@@ -13,6 +13,7 @@ docker-pinata-support.s3.amazonaws.com,https://docker-pinata-support.s3.amazonaw
 api.dso.docker.com,https://api.dso.docker.com,Docker Scout service
 api.docker.com,https://api.docker.com,New API
 api.offload.docker.com,https://api.offload.docker.com,Docker Offload
+api.sandboxes-cloud.docker.com,https://api.sandboxes-cloud.docker.com,Docker Offload
 dhi.io,https://dhi.io,Docker Hardened Images
 registry.scout.docker.com,https://registry.scout.docker.com,Docker Scout registry for DHI attestations
 ai-backend-service.docker.com,https://ai-backend-service.docker.com,[Gordon](/ai/gordon/)
